@@ -58,13 +58,12 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         color: ResColor.greyColor,
         width: MediaQuery.of(context).size.width,
-        child: Expanded(
-          child: ListView(
-            padding: EdgeInsets.all(20),
-            children: [
-              Padding(
-                padding: EdgeInsets.only(bottom: 20),
-                child:       Container(
+        child: ListView(
+          padding: EdgeInsets.all(20),
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 20),
+              child: Container(
                 padding: EdgeInsets.all(16),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14.0),
@@ -94,10 +93,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         ),
                         IconButton(
-                            icon: Icon(
-                          Icons.bookmark_outline,
-                          color: ResColor.blueColor,
-                        ))
+                          icon: Icon(
+                            Icons.bookmark_outline,
+                            color: ResColor.blueColor,
+                          ),
+                          onPressed: () {},
+                        )
                       ],
                     ),
                     Text(
@@ -135,9 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

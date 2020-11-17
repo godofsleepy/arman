@@ -32,12 +32,16 @@ class _BottomBarState extends State<BottomBar> {
         index: 0,
         height: 50.0,
         items: <Widget>[
-          Icon(Icons.home, size: 30, color: Colors.white,),
+          Icon(
+            Icons.home,
+            size: 30,
+            color: Colors.white,
+          ),
           Icon(Icons.person, size: 30, color: Colors.white),
         ],
         color: ResColor.greenColor,
         buttonBackgroundColor: ResColor.greenColor,
-        backgroundColor: Colors.white,
+        backgroundColor: getColorIndex(),
         animationCurve: Curves.easeInOut,
         animationDuration: Duration(milliseconds: 600),
         onTap: (index) {
@@ -47,5 +51,17 @@ class _BottomBarState extends State<BottomBar> {
         },
       ),
     );
+  }
+
+  Color getColorIndex() {
+    switch (selectedIndex) {
+      case 0:
+        return ResColor.greyColor;
+        break;
+      case 1:
+        return Colors.white;
+        break;
+      default:
+    }
   }
 }
