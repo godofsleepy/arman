@@ -1,4 +1,5 @@
 import 'package:arman/helper/resource.dart';
+import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,90 +56,62 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      body: Container(
-        color: ResColor.greyColor,
-        width: MediaQuery.of(context).size.width,
-        child: ListView(
-          padding: EdgeInsets.all(20),
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14.0),
-                    color: Colors.white),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.network(
-                                "https://yt3.ggpht.com/a/AATXAJw-qO5-_fvlpv_GxqNA1pEGN8_Np7sHm6HB3FYSCw=s900-c-k-c0x00ffffff-no-rj",
-                                width: 30,
-                              ),
-                            ),
-                            Text(
-                              "Muslim.or.id",
-                              style: TextStyle(
-                                  color: ResColor.blackColor,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14),
-                            ),
-                          ],
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            Icons.bookmark_outline,
-                            color: ResColor.blueColor,
+      body: Column(
+        children: [
+          Container(
+            height: 104,
+            child: ListView(
+              padding: EdgeInsets.only(left: 25, top: 16),
+              scrollDirection: Axis.horizontal,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: Column(
+                    children: [
+                      ClipOval(
+                        child: Material(
+                          color: ResColor.greenColor, // button color
+                          child: InkWell(
+                            splashColor: ResColor.blueColor, // inkwell color
+                            child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: Icon(
+                                  Icons.home,
+                                  color: Colors.white,
+                                )),
+                            onTap: () {},
                           ),
-                          onPressed: () {},
-                        )
-                      ],
-                    ),
-                    Text(
-                      "Nike beggins selling hijab",
-                      style: TextStyle(
-                          color: ResColor.blackColor,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      "3 jam yang lalu",
-                      style: TextStyle(
-                          color: ResColor.blueColor,
-                          fontWeight: FontWeight.w300,
-                          fontSize: 13),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Align(
-                      alignment: Alignment.center,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image.network(
-                          "https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/815/cached.offlinehbpl.hbpl.co.uk/news/OMC/NikeMuslim-20180124014618716.jpg",
-                          height: 180,
-                          width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.cover,
                         ),
                       ),
-                    )
-                  ],
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        "Trending",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 13),
+                      )
+                    ],
+                  ),
                 ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: Container(
+              color: ResColor.greyColor,
+              width: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                padding: EdgeInsets.all(20),
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return ItemNews();
+                },
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+        ],
       ),
     );
   }

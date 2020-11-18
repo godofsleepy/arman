@@ -59,7 +59,7 @@ class _BottomBarState extends State<BottomBar> {
         return ResColor.greyColor;
         break;
       case 1:
-        return Colors.white;
+        return Theme.of(context).scaffoldBackgroundColor;
         break;
       default:
     }
