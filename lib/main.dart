@@ -1,9 +1,9 @@
-import 'package:arman/view/component/bottom_bar.dart';
 import 'package:arman/view/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main()  {
+  
   runApp(MyApp());
 }
 

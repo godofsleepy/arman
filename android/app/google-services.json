@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "4195668652",
+    "firebase_url": "https://arman-1b57d.firebaseio.com",
+    "project_id": "arman-1b57d",
+    "storage_bucket": "arman-1b57d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:4195668652:android:24fbe8b23a58281313c509",
+        "android_client_info": {
+          "package_name": "com.example.arman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "4195668652-694bu8joqp16l838gdggedjjjs4ffh8q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiqYCla5FzHRHXoJkEvzaHXsWDxlswm6M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "4195668652-694bu8joqp16l838gdggedjjjs4ffh8q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "4195668652-qnnje2ed11o0qskqshgt9dob2msniok2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.arman"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
