@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key key}) : super(key: key);
+class ProfileView extends StatefulWidget {
+  ProfileView({Key key}) : super(key: key);
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _ProfileViewState createState() => _ProfileViewState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

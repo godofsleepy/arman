@@ -1,14 +1,14 @@
 import 'package:arman/helper/resource.dart';
 import 'package:flutter/material.dart';
 
-class DetailNews extends StatefulWidget {
-  DetailNews({Key key}) : super(key: key);
+class DetailNewsView extends StatefulWidget {
+  DetailNewsView({Key key}) : super(key: key);
 
   @override
-  _DetailNewsState createState() => _DetailNewsState();
+  _DetailNewsViewState createState() => _DetailNewsViewState();
 }
 
-class _DetailNewsState extends State<DetailNews> {
+class _DetailNewsViewState extends State<DetailNewsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

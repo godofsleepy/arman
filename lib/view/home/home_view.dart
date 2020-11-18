@@ -1,16 +1,16 @@
 import 'package:arman/helper/resource.dart';
-import 'package:arman/view/detail_news/detail_news.dart';
+import 'package:arman/view/detail_news/detailNews_view.dart';
 import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  HomeScreen({Key key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  HomeView({Key key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _HomeViewState createState() => _HomeViewState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DetailNews()));
+                              builder: (context) => DetailNewsView()));
                     },
                     child: ItemNews(),
                   );

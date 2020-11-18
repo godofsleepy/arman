@@ -1,6 +1,7 @@
 import 'package:arman/helper/resource.dart';
 import 'package:arman/view/home/home_view.dart';
 import 'package:arman/view/profile/profile_view.dart';
+
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -15,8 +16,8 @@ class _BottomBarState extends State<BottomBar> {
   GlobalKey _bottomNavigationKey = GlobalKey();
   int selectedIndex = 0;
   List<Widget> screenWidget = [
-    HomeScreen(),
-    ProfileScreen(),
+    HomeView(),
+    ProfileView(),
   ];
 
   @override
