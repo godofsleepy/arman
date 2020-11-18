@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Arman',
       theme: ThemeData(
+        appBarTheme: AppBarTheme(brightness: Brightness.light),
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
       ),

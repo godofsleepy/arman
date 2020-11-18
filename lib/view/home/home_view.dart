@@ -1,4 +1,5 @@
 import 'package:arman/helper/resource.dart';
+import 'package:arman/view/detail_news/detail_news.dart';
 import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 
@@ -106,7 +107,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.all(20),
                 itemCount: 10,
                 itemBuilder: (context, index) {
-                  return ItemNews();
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DetailNews()));
+                    },
+                    child: ItemNews(),
+                  );
                 },
               ),
             ),
