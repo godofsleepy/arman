@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
         preferredSize: Size.fromHeight(60),
         child: Container(
           alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(top: 4, right: 20, left: 20, bottom: 4),
+          padding: EdgeInsets.only(top: 4, right: 8, left: 8, bottom: 4),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,54 +57,56 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Container(
-            height: 104,
-            child: ListView(
-              padding: EdgeInsets.only(left: 25, top: 16),
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Column(
-                    children: [
-                      ClipOval(
-                        child: Material(
-                          color: ResColor.greenColor, // button color
-                          child: InkWell(
-                            splashColor: ResColor.blueColor, // inkwell color
-                            child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Icon(
-                                  Icons.home,
-                                  color: Colors.white,
-                                )),
-                            onTap: () {},
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 70,
+              child: ListView(
+                padding: EdgeInsets.only(left: 16, top: 4),
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Column(
+                      children: [
+                        ClipOval(
+                          child: Material(
+                            color: ResColor.greenColor, // button color
+                            child: InkWell(
+                              splashColor: ResColor.blueColor, // inkwell color
+                              child: SizedBox(
+                                  width: 35,
+                                  height: 35,
+                                  child: Icon(
+                                    Icons.home,
+                                    color: Colors.white,
+                                  )),
+                              onTap: () {},
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        "Trending",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 13),
-                      )
-                    ],
+                        SizedBox(
+                          height: 2,
+                        ),
+                        Text(
+                          "Trending",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 12),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
-            child: Container(
+            Container(
               color: ResColor.greyColor,
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 padding: EdgeInsets.all(20),
+                shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   return GestureDetector(
@@ -119,8 +121,8 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

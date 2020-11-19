@@ -1,7 +1,6 @@
 import 'package:arman/helper/resource.dart';
 import 'package:arman/view/home/home_view.dart';
 import 'package:arman/view/profile/profile_view.dart';
-
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
