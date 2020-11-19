@@ -16,7 +16,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
         preferredSize: Size.fromHeight(50),
         child: Container(
           alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(top: 4, right: 20, left: 20),
+          padding: EdgeInsets.only(top: 4, right: 20, left: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

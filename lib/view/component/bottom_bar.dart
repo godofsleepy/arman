@@ -37,6 +37,11 @@ class _BottomBarState extends State<BottomBar> {
             size: 30,
             color: Colors.white,
           ),
+          Icon(
+            Icons.home,
+            size: 30,
+            color: Colors.white,
+          ),
           Icon(Icons.person, size: 30, color: Colors.white),
         ],
         color: ResColor.greenColor,
