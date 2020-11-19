@@ -16,7 +16,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
         preferredSize: Size.fromHeight(50),
         child: Container(
           alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(top: 4, right: 20, left: 16),
+          padding: EdgeInsets.only(top: 4, right: 12, left: 12),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -45,7 +45,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.only(right: 24, left: 24, bottom: 16, top: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

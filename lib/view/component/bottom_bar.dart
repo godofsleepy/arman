@@ -1,4 +1,6 @@
 import 'package:arman/helper/resource.dart';
+import 'package:arman/view/explore/explore_view.dart';
+import 'package:arman/view/following/following_view.dart';
 import 'package:arman/view/home/home_view.dart';
 import 'package:arman/view/profile/profile_view.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -16,6 +18,8 @@ class _BottomBarState extends State<BottomBar> {
   int selectedIndex = 0;
   List<Widget> screenWidget = [
     HomeView(),
+    ExploreView(),
+    FollowingView(),
     ProfileView(),
   ];
 
@@ -38,10 +42,16 @@ class _BottomBarState extends State<BottomBar> {
             color: Colors.white,
           ),
           Icon(
-            Icons.home,
+            Icons.explore,
             size: 30,
             color: Colors.white,
           ),
+          Icon(
+            Icons.library_add,
+            size: 30,
+            color: Colors.white,
+          ),
+          
           Icon(Icons.person, size: 30, color: Colors.white),
         ],
         color: ResColor.greenColor,
@@ -67,6 +77,8 @@ class _BottomBarState extends State<BottomBar> {
         return Theme.of(context).scaffoldBackgroundColor;
         break;
       default:
+      return Theme.of(context).scaffoldBackgroundColor;
+      break;
     }
   }
 }

@@ -56,7 +56,7 @@ class _SplashViewState extends State<SplashView> {
                       ),
                       Text(
                         "Artike muslim penuh manfaat",
-                        style: TextStyle(color: ResColor.blueColor),
+                        style: TextStyle(color: ResColor.blueColor,fontSize: 12),
                       )
                     ],
                   ),
