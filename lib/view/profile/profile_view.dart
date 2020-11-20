@@ -65,11 +65,19 @@ class _ProfileViewState extends State<ProfileView> {
                         ),
                         child: Column(
                           children: <Widget>[
-                            Text("Rifat Khadafy", style: TextStyle(
-                              color: ResColor.blackColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600
-                            ),),
+                            Text(
+                              "Rifat Khadafy",
+                              style: TextStyle(
+                                  color: ResColor.blackColor,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            Text(
+                              "28 Jul 2020",
+                              style: TextStyle(
+                                  color: ResColor.blackColor,
+                                  fontWeight: FontWeight.w300),
+                            ),
                           ],
                         ),
                       ),
@@ -89,7 +97,25 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           ),
                         ),
-                      )
+                      ),
+                      Positioned(
+                        top: 150,
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.network(
+                                "https://images.unsplash.com/photo-1509585585779-17594514ad43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
+                                fit: BoxFit.cover,
+                                width: 90,
+                                height: 90,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
