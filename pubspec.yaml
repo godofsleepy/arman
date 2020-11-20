@@ -35,10 +35,16 @@ dependencies:
   google_sign_in: "^4.5.1"
   flutter_facebook_auth: ^1.0.1
   firebase_core: ^0.5.2
+  flutter_launcher_icons: ^0.8.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/logo.png"    
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

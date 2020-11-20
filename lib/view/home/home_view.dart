@@ -18,7 +18,7 @@ class _HomeViewState extends State<HomeView> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60),
         child: SafeArea(
-                  child: Container(
+          child: Container(
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(top: 4, right: 8, left: 8, bottom: 4),
             child: Row(
@@ -27,13 +27,6 @@ class _HomeViewState extends State<HomeView> {
               children: [
                 Row(
                   children: [
-                    // Image.asset(
-                    //   "assets/logo.png",
-                    //   height: 40,
-                    // ),
-                    // SizedBox(
-                    //   width: 4,
-                    // ),
                     Text(
                       "Arman",
                       textAlign: TextAlign.center,
@@ -45,7 +38,6 @@ class _HomeViewState extends State<HomeView> {
                     ),
                   ],
                 ),
-                
               ],
             ),
           ),
