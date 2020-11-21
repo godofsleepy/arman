@@ -29,56 +29,51 @@ class _BottomBarState extends State<BottomBar> {
       body: Stack(
         children: [
           screenWidget.elementAt(selectedIndex),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Theme(
+                data:
+                    Theme.of(context).copyWith(canvasColor: Colors.transparent),
+                child: CurvedNavigationBar(
+                  key: _bottomNavigationKey,
+                  index: 0,
+                  height: 50.0,
+                  items: <Widget>[
+                    Icon(
+                      Icons.home,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.explore,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.library_add,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                    Icon(
+                      Icons.person,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ],
+                  color: ResColor.greenColor,
+                  buttonBackgroundColor: ResColor.greenColor,
+                  backgroundColor: Colors.transparent,
+                  animationCurve: Curves.easeInOut,
+                  animationDuration: Duration(milliseconds: 600),
+                  onTap: (index) {
+                    setState(() {
+                      selectedIndex = index;
+                    });
+                  },
+                ),
+              )),
         ],
-      ),
-      bottomNavigationBar: CurvedNavigationBar(
-        key: _bottomNavigationKey,
-        index: 0,
-        height: 50.0,
-        items: <Widget>[
-          Icon(
-            Icons.home,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.explore,
-            size: 30,
-            color: Colors.white,
-          ),
-          Icon(
-            Icons.library_add,
-            size: 30,
-            color: Colors.white,
-          ),
-          
-          Icon(Icons.person, size: 30, color: Colors.white),
-        ],
-        color: ResColor.greenColor,
-        buttonBackgroundColor: ResColor.greenColor,
-        backgroundColor: getColorIndex(),
-        animationCurve: Curves.easeInOut,
-        animationDuration: Duration(milliseconds: 600),
-        onTap: (index) {
-          setState(() {
-            selectedIndex = index;
-          });
-        },
       ),
     );
-  }
-
-  Color getColorIndex() {
-    switch (selectedIndex) {
-      case 0:
-        return ResColor.greyColor;
-        break;
-      case 1:
-        return Theme.of(context).scaffoldBackgroundColor;
-        break;
-      default:
-      return Theme.of(context).scaffoldBackgroundColor;
-      break;
-    }
   }
 }

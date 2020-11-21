@@ -53,8 +53,8 @@ class _HomeViewState extends State<HomeView> {
               child: ListView.builder(
                 padding: EdgeInsets.only(left: 16, top: 4),
                 scrollDirection: Axis.horizontal,
-                itemCount: 8,
-                itemBuilder: (context, index) => ItemCategory(),
+                itemCount: 1,
+                itemBuilder: (context, index) => ItemCategory(index: index,),
               ),
             ),
             Container(

@@ -2,7 +2,8 @@ import 'package:arman/helper/resource.dart';
 import 'package:flutter/material.dart';
 
 class ItemCategory extends StatelessWidget {
-  const ItemCategory({Key key}) : super(key: key);
+  final int index;
+  const ItemCategory({Key key, this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +13,14 @@ class ItemCategory extends StatelessWidget {
         children: [
           ClipOval(
             child: Material(
-              color: ResColor.greenColor, // button color
+              color: ResColor.blueColor, // button color
               child: InkWell(
-                splashColor: ResColor.blueColor, // inkwell color
+                splashColor: ResColor.whiteColor, // inkwell color
                 child: SizedBox(
                     width: 35,
                     height: 35,
                     child: Icon(
-                      Icons.home,
+                      Icons.add,
                       color: Colors.white,
                     )),
                 onTap: () {},
@@ -30,7 +31,7 @@ class ItemCategory extends StatelessWidget {
             height: 2,
           ),
           Text(
-            "Trending",
+            "Add",
             style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
           )
         ],

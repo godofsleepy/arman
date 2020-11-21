@@ -14,7 +14,7 @@ class _ItemBookmarkState extends State<ItemBookmark> {
       padding: EdgeInsets.zero,
       width: 140,
       height: 180,
-      margin: EdgeInsets.only(right: 18),
+      margin: EdgeInsets.only(right: 15),
       child: Stack(
         children: [
           ClipRRect(
