@@ -19,7 +19,6 @@ class _SplashViewState extends State<SplashView> {
     // TODO: implement initState
     super.initState();
     Firebase.initializeApp().whenComplete(() {
-      print("completed");
       setState(() {
         Timer(
             Duration(seconds: 3),
@@ -56,7 +55,8 @@ class _SplashViewState extends State<SplashView> {
                       ),
                       Text(
                         "Artike muslim penuh manfaat",
-                        style: TextStyle(color: ResColor.blueColor,fontSize: 12),
+                        style:
+                            TextStyle(color: ResColor.blueColor, fontSize: 12),
                       )
                     ],
                   ),

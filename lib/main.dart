@@ -1,9 +1,14 @@
+import 'package:arman/helper/resource.dart';
 import 'package:arman/view/splash/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main()  {
-  
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    systemNavigationBarColor: ResColor.greenColor, // navigation bar color
+    systemNavigationBarIconBrightness: Brightness.light,
+  ));
   runApp(MyApp());
 }
 

@@ -19,6 +19,7 @@ class _HomeViewState extends State<HomeView> {
         preferredSize: Size.fromHeight(60),
         child: SafeArea(
           child: Container(
+            color: Colors.white,
             alignment: Alignment.centerLeft,
             padding: EdgeInsets.only(top: 4, right: 8, left: 8, bottom: 4),
             child: Row(
@@ -48,6 +49,7 @@ class _HomeViewState extends State<HomeView> {
           children: [
             Container(
               height: 70,
+              color: Colors.white,
               child: ListView.builder(
                 padding: EdgeInsets.only(left: 16, top: 4),
                 scrollDirection: Axis.horizontal,
