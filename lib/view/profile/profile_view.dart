@@ -45,7 +45,7 @@ class _ProfileViewState extends State<ProfileView> {
                         top: MediaQuery.of(context).size.height * 0.08,
                         left: 2,
                         right: 2,
-                        bottom: 30),
+                        bottom: 65),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
