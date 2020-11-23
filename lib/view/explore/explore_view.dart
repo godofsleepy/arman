@@ -1,4 +1,6 @@
 import 'package:arman/helper/resource.dart';
+import 'package:arman/view/explore/component/tag_populer.dart';
+import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 
 class ExploreView extends StatefulWidget {
@@ -27,9 +29,9 @@ class _ExploreViewState extends State<ExploreView> {
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
+                          color: Colors.grey.withOpacity(0.1),
                           spreadRadius: 5,
-                          blurRadius: 7,
+                          blurRadius: 15,
                           offset: Offset(0, 1),
                         ),
                       ],
@@ -67,7 +69,7 @@ class _ExploreViewState extends State<ExploreView> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    "Trending",
+                    "Populer",
                     style: TextStyle(
                         fontSize: 18,
                         color: ResColor.blackColor.withOpacity(0.7),
@@ -79,57 +81,24 @@ class _ExploreViewState extends State<ExploreView> {
                 ),
                 Container(
                   height: 200,
-                  child: ListView(
+                  child: ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
-                    children: [
-                      Container(
-                        child: ListTile(
-                          subtitle: Text(
-                            "Bagaimana cara salam yang baik dan benar",
-                            style: TextStyle(fontSize: 12),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          leading: Text(
-                            "1",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          title: Text("Salam"),
-                          trailing: FlatButton.icon(
-                            textColor: ResColor.blueColor,
-                            onPressed: () {
-                              // Respond to button press
-                            },
-                            icon: Icon(Icons.add, size: 18),
-                            label: Text("follow"),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        child: ListTile(
-                          leading: Text(
-                            "2",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          title: Text("Salam"),
-                        ),
-                      ),
-                      Container(
-                        child: ListTile(
-                          leading: Text(
-                            "1",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          title: Text("Salam"),
-                        ),
-                      ),
-                    ],
+                    
+                    itemCount: 3,
+                    itemBuilder: (context, index) => TagPopuler(index : index +1 ),
+                  ),
+                ),
+
+                Divider(
+                  height: 40,
+                  thickness: 2,
+                ),
+                Container(
+                  height: MediaQuery.of(context).size.height,
+                  child: ListView.builder(
+                    itemCount: 3,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) => ItemNews(),
                   ),
                 )
               ],
