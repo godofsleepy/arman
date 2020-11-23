@@ -13,14 +13,14 @@ class ItemCategory extends StatelessWidget {
         children: [
           ClipOval(
             child: Material(
-              color: ResColor.blueColor, // button color
+              color: ResColor.greenColor, // button color
               child: InkWell(
                 splashColor: ResColor.whiteColor, // inkwell color
                 child: SizedBox(
                     width: 35,
                     height: 35,
                     child: Icon(
-                      Icons.add,
+                      Icons.home,
                       color: Colors.white,
                     )),
                 onTap: () {},
@@ -31,7 +31,7 @@ class ItemCategory extends StatelessWidget {
             height: 2,
           ),
           Text(
-            "Add",
+            "For You",
             style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
           )
         ],

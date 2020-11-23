@@ -79,8 +79,6 @@ class _LoginViewState extends State<LoginView> {
                     onPressed: () {
                       signInWithGoogle().then((value) {
                         print(value.user.photoURL);
-                        
-                        
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
