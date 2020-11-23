@@ -74,10 +74,10 @@ class _ProfileViewState extends State<ProfileView> {
                                     fontWeight: FontWeight.w600),
                               ),
                               Text(
-                                "28 Jul 2020",
+                                "khadafy67@gmail.com",
                                 style: TextStyle(
                                   color: ResColor.blackColor,
-                                  fontSize: 13,
+                                  fontSize: 12,
                                   fontWeight: FontWeight.w300,
                                 ),
                               ),

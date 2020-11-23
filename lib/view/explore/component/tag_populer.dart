@@ -11,7 +11,10 @@ class TagPopuler extends StatelessWidget {
       child: ListTile(
         subtitle: Text(
           "Bagaimana cara salam yang baik dan benar",
-          style: TextStyle(fontSize: 12),
+          style: TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w300,
+          ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
@@ -19,9 +22,13 @@ class TagPopuler extends StatelessWidget {
           index.toString(),
           style: TextStyle(
             fontSize: 20,
+            color: ResColor.blackColor
           ),
         ),
-        title: Text("Salam"),
+        title: Text(
+          "Salam",
+          style: TextStyle(color: ResColor.blackColor),
+        ),
         trailing: FlatButton.icon(
           textColor: ResColor.blueColor,
           onPressed: () {

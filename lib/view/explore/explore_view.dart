@@ -1,6 +1,7 @@
 import 'package:arman/helper/resource.dart';
 import 'package:arman/view/explore/component/tag_populer.dart';
 import 'package:arman/view/home/component/item_news.dart';
+import 'package:arman/view/search/search_view.dart';
 import 'package:flutter/material.dart';
 
 class ExploreView extends StatefulWidget {
@@ -16,11 +17,15 @@ class _ExploreViewState extends State<ExploreView> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SearchView()));
+                  },
                   child: Container(
                     padding:
                         EdgeInsets.only(right: 16, left: 16, top: 8, bottom: 8),
@@ -54,13 +59,6 @@ class _ExploreViewState extends State<ExploreView> {
                         ),
                       ],
                     ),
-                    // TextField(
-                    //   obscureText: true,
-                    //   decoration: InputDecoration(
-                    //     labelText: 'Search',
-                    //     prefixIcon: Icon(Icons.search),
-                    //   ),
-                    // ),
                   ),
                 ),
                 SizedBox(
@@ -95,7 +93,7 @@ class _ExploreViewState extends State<ExploreView> {
                 ),
                 Container(
                   child: ListView.builder(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 30),
                     itemCount: 3,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
