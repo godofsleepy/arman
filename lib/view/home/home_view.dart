@@ -62,7 +62,7 @@ class _HomeViewState extends State<HomeView> {
               width: MediaQuery.of(context).size.width,
               child: ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.only(bottom: 50, right: 20, top: 20, left: 20),
                 shrinkWrap: true,
                 itemCount: 10,
                 itemBuilder: (context, index) {

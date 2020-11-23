@@ -82,21 +82,22 @@ class _ExploreViewState extends State<ExploreView> {
                 Container(
                   height: 200,
                   child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: 30),
                     physics: NeverScrollableScrollPhysics(),
-                    
                     itemCount: 3,
-                    itemBuilder: (context, index) => TagPopuler(index : index +1 ),
+                    itemBuilder: (context, index) =>
+                        TagPopuler(index: index + 1),
                   ),
                 ),
-
                 Divider(
                   height: 40,
                   thickness: 2,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height,
                   child: ListView.builder(
+                    padding: EdgeInsets.only(bottom: 10),
                     itemCount: 3,
+                    shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) => ItemNews(),
                   ),
