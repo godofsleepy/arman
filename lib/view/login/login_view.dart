@@ -78,7 +78,6 @@ class _LoginViewState extends State<LoginView> {
                     Buttons.Google,
                     onPressed: () {
                       signInWithGoogle().then((value) {
-                        print(value.user.photoURL);
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -89,7 +88,13 @@ class _LoginViewState extends State<LoginView> {
                   SignInButton(
                     Buttons.Facebook,
                     onPressed: () {
-                      signInWithFacebook();
+                      signInWithFacebook().then((value) {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => BottomBar(),
+                            ));
+                      });
                     },
                   )
                 ],
@@ -102,14 +107,11 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-    // Trigger the authentication flow
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
 
-    // Create a new credential
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
@@ -121,10 +123,9 @@ class _LoginViewState extends State<LoginView> {
 
   Future<void> signInWithFacebook() async {
     try {
-      // by default the login method has the next permissions ['email','public_profile']
       AccessToken accessToken = await FacebookAuth.instance.login();
       print(accessToken.toJson());
-      // get the user data
+      
       final userData = await FacebookAuth.instance.getUserData();
       print(userData);
       Navigator.pushReplacement(

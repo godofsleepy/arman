@@ -1,4 +1,5 @@
 import 'package:arman/helper/resource.dart';
+import 'package:arman/view/login/login_view.dart';
 import 'package:flutter/material.dart';
 
 class MoreSheet extends StatelessWidget {
@@ -28,8 +29,16 @@ class MoreSheet extends StatelessWidget {
           FlatButton.icon(
             textColor: ResColor.blueColor,
             icon: Icon(Icons.login),
-            onPressed: () {},
-            label: Text("Logout"),
+            onPressed: () {
+              // Future<void> _handleSignOut() => _googleSignIn.disconnect();
+              Navigator.pop(context);
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => LoginView(),
+                  ));
+            },
+            label: Text("Sign Out"),
           ),
         ],
       ),
