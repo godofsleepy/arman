@@ -9,7 +9,8 @@ class ItemWebsite extends StatelessWidget {
     return Container(
       width: 90,
       decoration: BoxDecoration(
-          color: ResColor.greyColor, borderRadius: BorderRadius.circular(20)),
+        borderRadius: BorderRadius.circular(20),
+      ),
       margin: EdgeInsets.all(6),
       child: Column(
         children: [

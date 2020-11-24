@@ -1,5 +1,6 @@
 import 'package:arman/helper/resource.dart';
 import 'package:arman/view/profile/component/item_bookmark.dart';
+import 'package:arman/view/profile/component/more_sheet.dart';
 import 'package:flutter/material.dart';
 
 class ProfileView extends StatefulWidget {
@@ -216,6 +217,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                   Positioned(
                     top: 175,
+                    right: 15,
                     child: Container(
                       width: MediaQuery.of(context).size.width,
                       child: Align(
@@ -228,7 +230,20 @@ class _ProfileViewState extends State<ProfileView> {
                                 color: ResColor.blueColor,
                                 size: 26,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                  ),
+                                  builder: (BuildContext context) {
+                                    return MoreSheet();
+                                  },
+                                  context: context,
+                                );
+                              },
                             )),
                       ),
                     ),
