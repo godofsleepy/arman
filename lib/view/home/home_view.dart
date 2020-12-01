@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/detail_news/detailNews_view.dart';
 import 'package:arman/view/home/component/item_category.dart';
 import 'package:arman/view/home/component/item_news.dart';

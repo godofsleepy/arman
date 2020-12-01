@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/splash/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

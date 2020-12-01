@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/profile/component/item_bookmark.dart';
 import 'package:arman/view/profile/component/more_sheet.dart';
 import 'package:flutter/material.dart';

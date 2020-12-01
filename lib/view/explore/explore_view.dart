@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/explore/component/tag_populer.dart';
 import 'package:arman/view/home/component/item_news.dart';
 import 'package:arman/view/search/search_view.dart';

@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/component/bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +14,13 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
   @override
   void initState() {
     // TODO: implement initState
@@ -77,7 +84,16 @@ class _LoginViewState extends State<LoginView> {
                   SignInButton(
                     Buttons.Google,
                     onPressed: () {
+                      // _handleSignIn().then((value) {
+                      //   print(value);
+                      //   Navigator.pushReplacement(
+                      //       context,
+                      //       MaterialPageRoute(
+                      //           builder: (context) => BottomBar()));
+                      // });
+
                       signInWithGoogle().then((value) {
+                        print("value : ${value.user.uid}");
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -111,6 +127,8 @@ class _LoginViewState extends State<LoginView> {
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
+    print("Access Token : ${googleAuth.accessToken}");
+    print("Id Token : ${googleAuth.idToken}");
 
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -121,11 +139,20 @@ class _LoginViewState extends State<LoginView> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
+  // Future<GoogleSignInAccount> _handleSignIn() async {
+  //   try {
+  //     await _googleSignIn.signIn();
+  //     return _googleSignIn.currentUser;
+  //   } catch (error) {
+  //     print(error);
+  //   }
+  // }
+
   Future<void> signInWithFacebook() async {
     try {
       AccessToken accessToken = await FacebookAuth.instance.login();
       print(accessToken.toJson());
-      
+
       final userData = await FacebookAuth.instance.getUserData();
       print(userData);
       Navigator.pushReplacement(

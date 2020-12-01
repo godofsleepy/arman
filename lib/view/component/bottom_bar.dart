@@ -1,4 +1,4 @@
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/explore/explore_view.dart';
 import 'package:arman/view/following/following_view.dart';
 import 'package:arman/view/home/home_view.dart';

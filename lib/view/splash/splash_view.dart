@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:arman/helper/resource.dart';
+import 'package:arman/utils/resource.dart';
 import 'package:arman/view/login/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/material.dart';
 
 class SplashView extends StatefulWidget {
@@ -17,6 +18,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     Firebase.initializeApp().whenComplete(() {
       setState(() {
         Timer(
@@ -25,6 +27,12 @@ class _SplashViewState extends State<SplashView> {
                 context, MaterialPageRoute(builder: (context) => LoginView())));
       });
     });
+
+    // Timer(
+    //   Duration(seconds: 3),
+    //   () => Navigator.pushReplacement(
+    //       context, MaterialPageRoute(builder: (context) => LoginView())),
+    // );
   }
 
   @override
