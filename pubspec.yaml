@@ -34,17 +34,23 @@ dependencies:
   flutter_facebook_auth: ^1.0.1
   curved_navigation_bar: ^0.3.4
   flutter_signin_button: ^1.1.0
+  dio: ^3.0.10
+  flutter_bloc: ^6.1.1
+  equatable: ^1.2.5
   google_fonts: ^1.1.1
   chips_choice: ^2.0.1
-  http: ^0.12.2
-  rxdart: ^0.24.1
+  json_annotation: ^3.1.1
+  html_character_entities: ^0.1.2+4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter    
-
+  
+  json_serializable: ^3.5.0
+  build_runner: ^1.10.6
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+    
 
 # The following section is specific to Flutter.
 flutter:

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:arman/utils/resource.dart';
+import 'package:arman/view/component/bottom_bar.dart';
 import 'package:arman/view/login/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -24,7 +25,7 @@ class _SplashViewState extends State<SplashView> {
         Timer(
             Duration(seconds: 3),
             () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => LoginView())));
+                context, MaterialPageRoute(builder: (context) => BottomBar())));
       });
     });
 

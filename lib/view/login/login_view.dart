@@ -14,13 +14,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: <String>[
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
-
   @override
   void initState() {
     // TODO: implement initState
@@ -93,7 +86,10 @@ class _LoginViewState extends State<LoginView> {
                       // });
 
                       signInWithGoogle().then((value) {
-                        print("value : ${value.user.uid}");
+                        value.user
+                            .getIdTokenResult(true)
+                            .then((value) => print("value : $value"));
+
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
