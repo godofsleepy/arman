@@ -2,7 +2,6 @@ import 'package:arman/model/item.dart';
 import 'package:arman/utils/resource.dart';
 import 'package:arman/utils/utilities.dart';
 import 'package:flutter/material.dart';
-import 'package:html_character_entities/html_character_entities.dart';
 
 class ItemNews extends StatelessWidget {
   final Item item;
@@ -61,14 +60,15 @@ class ItemNews extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    HtmlCharacterEntities.decode(
-                      item.title ?? "",
-                    ),
+                    Utilities.parseHtmlString(item.title),
+                    // HtmlCharacterEntities.decode(
+                    //   item.title ?? "",
+                    // ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(
                         color: ResColor.blackColor,
-                        fontSize: 22,
+                        fontSize: 20,
                         fontWeight: FontWeight.w600),
                   ),
                   SizedBox(

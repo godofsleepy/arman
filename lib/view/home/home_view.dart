@@ -11,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/news_bloc.dart';
 
 class HomeView extends StatefulWidget {
+  
   HomeView({Key key}) : super(key: key);
 
   @override
@@ -149,7 +150,7 @@ class WidgetNews extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => DetailNewsView()));
+                          builder: (context) => DetailNewsView(id: responseData.data[index].id.toString(),)));
                 },
                 child: ItemNews(
                   item: responseData.data[index],
