@@ -4,19 +4,14 @@ import 'package:arman/utils/utilities.dart';
 import 'package:flutter/material.dart';
 import 'package:html_character_entities/html_character_entities.dart';
 
-class ItemNews extends StatefulWidget {
+class ItemNews extends StatelessWidget {
   final Item item;
 
-  ItemNews({Key key, this.item}) : super(key: key);
+  const ItemNews({Key key, this.item}) : super(key: key);
 
-  @override
-  _ItemNewsState createState() => _ItemNewsState();
-}
-
-class _ItemNewsState extends State<ItemNews> {
   @override
   Widget build(BuildContext context) {
-    return widget.item.content_type == "Article"
+    return item.content_type == "Article"
         ? Padding(
             padding: EdgeInsets.only(bottom: 20),
             child: Container(
@@ -35,7 +30,7 @@ class _ItemNewsState extends State<ItemNews> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(100),
                             child: Image.network(
-                              widget.item.source_logo,
+                              item.source_logo,
                               width: 22,
                             ),
                           ),
@@ -43,7 +38,7 @@ class _ItemNewsState extends State<ItemNews> {
                             width: 4,
                           ),
                           Text(
-                            widget.item.source ?? "",
+                            item.source ?? "",
                             style: TextStyle(
                                 color: ResColor.blackColor,
                                 fontWeight: FontWeight.w500,
@@ -52,7 +47,7 @@ class _ItemNewsState extends State<ItemNews> {
                         ],
                       ),
                       IconButton(
-                        icon: widget.item.bookmarked == false
+                        icon: item.bookmarked == false
                             ? Icon(
                                 Icons.bookmark_outline,
                                 color: ResColor.blueColor,
@@ -67,7 +62,7 @@ class _ItemNewsState extends State<ItemNews> {
                   ),
                   Text(
                     HtmlCharacterEntities.decode(
-                      widget.item.title ?? "",
+                      item.title ?? "",
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
@@ -80,8 +75,7 @@ class _ItemNewsState extends State<ItemNews> {
                     height: 8,
                   ),
                   Text(
-                    Utilities.countDifference(
-                        widget.item.content_date),
+                    Utilities.countDifference(item.content_date),
                     style: TextStyle(
                         color: ResColor.blueColor,
                         fontWeight: FontWeight.w300,
@@ -95,7 +89,7 @@ class _ItemNewsState extends State<ItemNews> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: Image.network(
-                        widget.item.thumbnail ??
+                        item.thumbnail ??
                             "https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/815/cached.offlinehbpl.hbpl.co.uk/news/OMC/NikeMuslim-20180124014618716.jpg",
                         height: 180,
                         width: MediaQuery.of(context).size.width,

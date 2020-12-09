@@ -1,3 +1,5 @@
+import 'package:arman/bloc/category_bloc.dart';
+import 'package:arman/model/category.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/utils/resource.dart';
 import 'package:arman/view/detail_news/detailNews_view.dart';
@@ -6,7 +8,7 @@ import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'home_bloc.dart';
+import '../../bloc/news_bloc.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -16,11 +18,13 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final HomeBloc homeBloc = HomeBloc(HomeInitial());
+  final NewsBloc newsBloc = NewsBloc(NewsInitial());
+  final CategoryBloc categoryBloc = CategoryBloc(CategoryInitial());
 
   @override
   void initState() {
-    homeBloc.add(HomeEvent());
+    categoryBloc.add(CategoryEvent());
+    newsBloc.add(NewsEvent());
     super.initState();
   }
 
@@ -56,22 +60,23 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ),
-      body: BlocProvider(
-        create: (context) => homeBloc,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<CategoryBloc>(
+            create: (context) => categoryBloc,
+          ),
+          BlocProvider<NewsBloc>(
+            create: (context) => newsBloc,
+          ),
+        ],
         child: SingleChildScrollView(
           child: Column(
             children: [
               Container(
+                width: MediaQuery.of(context).size.width,
                 height: 70,
                 color: Colors.white,
-                child: ListView.builder(
-                  padding: EdgeInsets.only(left: 16, top: 4),
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 1,
-                  itemBuilder: (context, index) => ItemCategory(
-                    index: index,
-                  ),
-                ),
+                child: WidgetCategory(),
               ),
               WidgetNews(),
             ],
@@ -82,6 +87,37 @@ class _HomeViewState extends State<HomeView> {
   }
 }
 
+class WidgetCategory extends StatelessWidget {
+  const WidgetCategory({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
+      if (state is CategoryLoading) {
+        return Container(
+          width: MediaQuery.of(context).size.width,
+          child: CircularProgressIndicator(),
+        );
+      } else if (state is CategoryFailure) {
+        return Container(
+          child: Text("error"),
+        );
+      } else if (state is CategoryLoaded) {
+        ResponseCategory responseCategory = state.data;
+        return ListView.builder(
+          padding: EdgeInsets.only(left: 16, top: 4),
+          scrollDirection: Axis.horizontal,
+          itemCount: responseCategory.data.sources.length,
+          itemBuilder: (context, index) => ItemCategory(
+            index: index,
+            sourceWeb: responseCategory.data.sources[index],
+          ),
+        );
+      }
+    });
+  }
+}
+
 class WidgetNews extends StatelessWidget {
   const WidgetNews({
     Key key,
@@ -89,16 +125,16 @@ class WidgetNews extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      if (state is HomeLoading) {
+    return BlocBuilder<NewsBloc, NewsState>(builder: (context, state) {
+      if (state is NewsLoading) {
         return Container(
           margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
           child: CircularProgressIndicator(),
         );
-      } else if (state is HomeFailure) {
+      } else if (state is NewsFailure) {
         return Container();
-      } else if (state is HomeLoaded) {
-        ResponseData responseData = state.recommendation;
+      } else if (state is NewsLoaded) {
+        ResponseData responseData = state.data;
         return Container(
           color: ResColor.greyColor,
           width: MediaQuery.of(context).size.width,
