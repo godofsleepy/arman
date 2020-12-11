@@ -61,9 +61,6 @@ class ItemNews extends StatelessWidget {
                   ),
                   Text(
                     Utilities.parseHtmlString(item.title),
-                    // HtmlCharacterEntities.decode(
-                    //   item.title ?? "",
-                    // ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                     style: TextStyle(

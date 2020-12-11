@@ -41,6 +41,7 @@ dependencies:
   chips_choice: ^2.0.1
   json_annotation: ^3.1.1
   html: ^0.14.0+4
+  shimmer: ^1.1.2
   flutter_html: ^1.1.0
 
 dev_dependencies:

@@ -1,17 +1,19 @@
 import 'package:arman/bloc/category_bloc.dart';
 import 'package:arman/model/category.dart';
+import 'package:arman/model/item.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/utils/resource.dart';
+import 'package:arman/view/component/bottom_loader.dart';
 import 'package:arman/view/detail_news/detailNews_view.dart';
 import 'package:arman/view/home/component/item_category.dart';
 import 'package:arman/view/home/component/item_news.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../bloc/news_bloc.dart';
 
 class HomeView extends StatefulWidget {
-  
   HomeView({Key key}) : super(key: key);
 
   @override
@@ -19,13 +21,20 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  final NewsBloc newsBloc = NewsBloc(NewsInitial());
+  final NewsBloc newsBloc = NewsBloc();
   final CategoryBloc categoryBloc = CategoryBloc(CategoryInitial());
+  final scrollController = ScrollController();
+  int page = 1;
 
   @override
   void initState() {
     categoryBloc.add(CategoryEvent());
-    newsBloc.add(NewsEvent());
+    newsBloc.add(NewsFetch());
+    scrollController.addListener(() {
+      if (isBottom) {
+        newsBloc.add(NewsFetch(page: page++));
+      }
+    });
     super.initState();
   }
 
@@ -71,6 +80,7 @@ class _HomeViewState extends State<HomeView> {
           ),
         ],
         child: SingleChildScrollView(
+          controller: scrollController,
           child: Column(
             children: [
               Container(
@@ -86,6 +96,20 @@ class _HomeViewState extends State<HomeView> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  bool get isBottom {
+    if (!scrollController.hasClients) return false;
+    final maxScroll = scrollController.position.maxScrollExtent;
+    final currentScroll = scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
+  }
 }
 
 class WidgetCategory extends StatelessWidget {
@@ -95,9 +119,33 @@ class WidgetCategory extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryBloc, CategoryState>(builder: (context, state) {
       if (state is CategoryLoading) {
-        return Container(
-          width: MediaQuery.of(context).size.width,
-          child: CircularProgressIndicator(),
+        return Shimmer.fromColors(
+          child: ListView.builder(
+              padding: EdgeInsets.only(left: 16, top: 4),
+              scrollDirection: Axis.horizontal,
+              itemCount: 6,
+              itemBuilder: (context, index) => Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: Column(
+                      children: [
+                        ClipOval(
+                          child: Material(
+                            color: ResColor.greenColor, // button color
+                            child: SizedBox(
+                              width: 35,
+                              height: 35,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 2,
+                        ),
+                      ],
+                    ),
+                  )),
+          baseColor: Colors.grey[300],
+          highlightColor: Colors.grey[100],
+          enabled: true,
         );
       } else if (state is CategoryFailure) {
         return Container(
@@ -127,15 +175,13 @@ class WidgetNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, NewsState>(builder: (context, state) {
-      if (state is NewsLoading) {
-        return Container(
-          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
-          child: CircularProgressIndicator(),
-        );
-      } else if (state is NewsFailure) {
+      print(state.status);
+      if (state.status == NewsStatus.failure) {
+        print("failure");
         return Container();
-      } else if (state is NewsLoaded) {
-        ResponseData responseData = state.data;
+      } else if (state.status == NewsStatus.success) {
+        List<Item> responseData = state.data;
+        print("Data");
         return Container(
           color: ResColor.greyColor,
           width: MediaQuery.of(context).size.width,
@@ -143,24 +189,32 @@ class WidgetNews extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(bottom: 50, right: 20, top: 20, left: 20),
             shrinkWrap: true,
-            itemCount: responseData.data.length,
+            itemCount: responseData.length + 1,
             itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DetailNewsView(id: responseData.data[index].id.toString(),)));
-                },
-                child: ItemNews(
-                  item: responseData.data[index],
-                ),
-              );
+              return index >= responseData.length
+                  ? BottomLoader()
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => DetailNewsView(
+                                      id: responseData[index].id.toString(),
+                                    )));
+                      },
+                      child: ItemNews(
+                        item: responseData[index],
+                      ),
+                    );
             },
           ),
         );
       } else {
-        return Container();
+        print("Loading");
+        return Container(
+          margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
+          child: CircularProgressIndicator(),
+        );
       }
     });
   }

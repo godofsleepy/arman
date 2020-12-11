@@ -21,13 +21,13 @@ class MoreSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           FlatButton.icon(
-            textColor: ResColor.blueColor,
+            textColor: ResColor.blackColor,
             icon: Icon(Icons.info_outline),
             onPressed: () {},
             label: Text("About"),
           ),
           FlatButton.icon(
-            textColor: ResColor.blueColor,
+            textColor: ResColor.blackColor,
             icon: Icon(Icons.login),
             onPressed: () {
               // Future<void> _handleSignOut() => _googleSignIn.disconnect();

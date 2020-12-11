@@ -46,21 +46,11 @@ class ItemCategory extends StatelessWidget {
                 child: Column(
                   children: [
                     ClipOval(
-                      child: Material(
-                        color: ResColor.greenColor, // button color
-                        child: InkWell(
-                          splashColor: ResColor.whiteColor, // inkwell color
-                          child: SizedBox(
-                              width: 35,
-                              height: 35,
-                              child: Icon(
-                                Icons.home,
-                                color: Colors.white,
-                              )),
-                          onTap: () {},
-                        ),
-                      ),
-                    ),
+                        child: Image.network(
+                      sourceWeb.logo,
+                      width: 35,
+                      height: 35,
+                    )),
                     SizedBox(
                       height: 2,
                     ),

@@ -7,7 +7,7 @@ import 'api_provider.dart';
 class ApiRepository {
   final ApiProvider apiProvider = ApiProvider();
 
-  Future<ResponseData> fetchRecommendation() => apiProvider.getRecomendation();
+  Future<ResponseData> fetchRecommendation(int page) => apiProvider.getRecomendation(page);
   Future<ResponseCategory> fetchCategory() => apiProvider.getCategory();
   Future<ResponseDetail> fetchDetail(String id) => apiProvider.getDetail(id);
 }

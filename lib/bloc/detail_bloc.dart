@@ -46,7 +46,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       print("error");
       return;
     }
-
+    
     yield DetailLoaded(data.data);
     }
   }

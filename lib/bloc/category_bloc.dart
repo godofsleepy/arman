@@ -29,12 +29,12 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
   @override
   Stream<CategoryState> mapEventToState(CategoryEvent event) async* {
     yield CategoryLoading();
-    print("Loading");
+    
     ResponseCategory data = await apiRepository.fetchCategory();
 
     if (data.success == false) {
       yield CategoryFailure(data.success.toString());
-      print("error");
+      
       return;
     }
 
