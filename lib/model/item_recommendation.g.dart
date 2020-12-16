@@ -6,7 +6,7 @@ part of 'item_recommendation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ItemRecommendation _$ItemFromJson(Map<String, dynamic> json) {
+ItemRecommendation _$ItemRecommendationFromJson(Map<String, dynamic> json) {
   return ItemRecommendation(
     id: json['id'] as int,
     content_type: json['content_type'] as String,
@@ -22,7 +22,8 @@ ItemRecommendation _$ItemFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$ItemToJson(ItemRecommendation instance) => <String, dynamic>{
+Map<String, dynamic> _$ItemRecommendationToJson(ItemRecommendation instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'title': instance.title,
       'content_type': instance.content_type,

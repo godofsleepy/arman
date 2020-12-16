@@ -53,4 +53,6 @@ class ApiProvider {
       return ResponseDetail.withError(e.toString());
     }
   }
+
+  
 }

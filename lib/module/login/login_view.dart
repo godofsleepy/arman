@@ -14,7 +14,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,14 +71,6 @@ class _LoginViewState extends State<LoginView> {
                   SignInButton(
                     Buttons.Google,
                     onPressed: () {
-                      // _handleSignIn().then((value) {
-                      //   print(value);
-                      //   Navigator.pushReplacement(
-                      //       context,
-                      //       MaterialPageRoute(
-                      //           builder: (context) => BottomBar()));
-                      // });
-
                       signInWithGoogle().then((value) {
                         value.user
                             .getIdTokenResult(true)
@@ -96,11 +87,11 @@ class _LoginViewState extends State<LoginView> {
                     Buttons.Facebook,
                     onPressed: () {
                       signInWithFacebook().then((value) {
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BottomBar(),
-                            ));
+                        // Navigator.pushReplacement(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //       builder: (context) => BottomBar(),
+                        //     ));
                       });
                     },
                   )
@@ -130,24 +121,14 @@ class _LoginViewState extends State<LoginView> {
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 
-  // Future<GoogleSignInAccount> _handleSignIn() async {
-  //   try {
-  //     await _googleSignIn.signIn();
-  //     return _googleSignIn.currentUser;
-  //   } catch (error) {
-  //     print(error);
-  //   }
-  // }
-
   Future<void> signInWithFacebook() async {
     try {
       AccessToken accessToken = await FacebookAuth.instance.login();
       print("access token : ${accessToken.toJson()}");
 
       final userData = await FacebookAuth.instance.getUserData();
-      print(userData);
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => BottomBar()));
+      print(userData.entries.elementAt(2).value);
+      print(userData.entries.elementAt(2).value['data']['url'].toString());
     } catch (e, s) {
       if (e is FacebookAuthException) {
         print(e.message);

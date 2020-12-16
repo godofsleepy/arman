@@ -31,9 +31,9 @@ class ItemRecommendation {
   });
 
   factory ItemRecommendation.fromJson(Map<String, dynamic> json) =>
-      _$ItemFromJson(json);
+      _$ItemRecommendationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ItemToJson(this);
+  Map<String, dynamic> toJson() => _$ItemRecommendationToJson(this);
 
   @override
   String toString() {
