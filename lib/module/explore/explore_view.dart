@@ -1,7 +1,7 @@
-import 'package:arman/utils/resource.dart';
-import 'package:arman/view/explore/component/tag_populer.dart';
-import 'package:arman/view/home/component/item_news.dart';
-import 'package:arman/view/search/search_view.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:arman/module/explore/component/tag_populer.dart';
+import 'package:arman/module/home/component/item_news.dart';
+import 'package:arman/module/module.dart';
 import 'package:flutter/material.dart';
 
 class ExploreView extends StatefulWidget {

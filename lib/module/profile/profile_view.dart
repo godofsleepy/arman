@@ -1,7 +1,8 @@
 import 'package:arman/utils/resource.dart';
-import 'package:arman/view/profile/component/item_bookmark.dart';
-import 'package:arman/view/profile/component/more_sheet.dart';
 import 'package:flutter/material.dart';
+
+import 'component/item_bookmark.dart';
+import 'component/more_sheet.dart';
 
 class ProfileView extends StatefulWidget {
   ProfileView({Key key}) : super(key: key);

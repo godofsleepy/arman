@@ -1,8 +1,8 @@
-import 'package:arman/utils/resource.dart';
-import 'package:arman/view/detail_news/detailNews_view.dart';
-import 'package:arman/view/search/component/item_search.dart';
-import 'package:arman/view/search/component/recent_search.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:arman/module/module.dart';
 import 'package:flutter/material.dart';
+import 'component/recent_search.dart';
+import 'component/item_search.dart';
 
 class SearchView extends StatefulWidget {
   SearchView({Key key}) : super(key: key);

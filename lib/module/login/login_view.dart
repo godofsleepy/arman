@@ -1,7 +1,7 @@
-import 'package:arman/utils/resource.dart';
-import 'package:arman/view/component/bottom_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:arman/module/module.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -14,11 +14,6 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                       signInWithGoogle().then((value) {
                         value.user
                             .getIdTokenResult(true)
-                            .then((value) => print("value : $value"));
+                            .then((value) => print("access token : $value"));
 
                         Navigator.pushReplacement(
                             context,
@@ -123,8 +118,8 @@ class _LoginViewState extends State<LoginView> {
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
-    print("Access Token : ${googleAuth.accessToken}");
-    print("Id Token : ${googleAuth.idToken}");
+    // print("Access Token : ${googleAuth.accessToken}");
+    // print("Id Token : ${googleAuth.idToken}");
 
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -147,7 +142,7 @@ class _LoginViewState extends State<LoginView> {
   Future<void> signInWithFacebook() async {
     try {
       AccessToken accessToken = await FacebookAuth.instance.login();
-      print(accessToken.toJson());
+      print("access token : ${accessToken.toJson()}");
 
       final userData = await FacebookAuth.instance.getUserData();
       print(userData);

@@ -1,8 +1,6 @@
-
-import 'package:arman/bloc/detail_bloc.dart';
-import 'package:arman/utils/resource.dart';
-import 'package:arman/utils/utilities.dart';
-import 'package:arman/view/component/circular_loading.dart';
+import 'package:arman/module/detail_news/detail_bloc.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:arman/module/component/circular_loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -117,7 +115,9 @@ class DetailContent extends StatelessWidget {
                           width: 24,
                         ),
                       ),
-                      SizedBox(width: 4,),
+                      SizedBox(
+                        width: 4,
+                      ),
                       Text(
                         state.data.source,
                         style: TextStyle(

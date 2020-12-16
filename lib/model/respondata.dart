@@ -1,12 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'item.dart';
+import 'item_recommendation.dart';
 
 part 'respondata.g.dart';
 
 @JsonSerializable()
 class ResponseData {
   bool success;
-  List<Item> data;
+  List<ItemRecommendation> data;
   String message;
   @JsonKey(ignore: true)
   String error;

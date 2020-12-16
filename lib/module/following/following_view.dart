@@ -1,5 +1,5 @@
-import 'package:arman/utils/resource.dart';
-import 'package:arman/view/following/component/item_website.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:arman/module/following/component/item_website.dart';
 import 'package:chips_choice/chips_choice.dart';
 import 'package:flutter/material.dart';
 

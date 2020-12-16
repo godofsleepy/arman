@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'item.g.dart';
+part 'item_recommendation.g.dart';
 
 @JsonSerializable()
-class Item {
+class ItemRecommendation {
   int id;
   String title;
   String content_type;
@@ -16,7 +16,7 @@ class Item {
   bool liked;
   bool bookmarked;
 
-  Item({
+  ItemRecommendation({
     this.id,
     this.content_type,
     this.title,
@@ -30,7 +30,7 @@ class Item {
     this.bookmarked,
   });
 
-  factory Item.fromJson(Map<String, dynamic> json) =>
+  factory ItemRecommendation.fromJson(Map<String, dynamic> json) =>
       _$ItemFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemToJson(this);

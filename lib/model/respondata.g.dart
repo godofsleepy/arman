@@ -10,7 +10,7 @@ ResponseData _$ResponseDataFromJson(Map<String, dynamic> json) {
   return ResponseData(
     (json['data'] as List)
         ?.map(
-            (e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))
+            (e) => e == null ? null : ItemRecommendation.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
     ..success = json['success'] as bool

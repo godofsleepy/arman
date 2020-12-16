@@ -1,5 +1,5 @@
-import 'package:arman/utils/resource.dart';
-import 'package:arman/view/login/login_view.dart';
+import 'package:arman/utils/utils.dart';
+import 'package:arman/module/module.dart';
 import 'package:flutter/material.dart';
 
 class MoreSheet extends StatelessWidget {
