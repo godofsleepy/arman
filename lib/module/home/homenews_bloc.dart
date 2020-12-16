@@ -50,7 +50,6 @@ class HomeNewsFetch extends HomeNewsEvent {
 
 class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
   final ApiRepository apiRepository = ApiRepository();
-  List<ItemRecommendation> listData;
 
   NewsBloc() : super(HomeNewsState());
 

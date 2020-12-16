@@ -1,8 +1,13 @@
-import 'package:arman/utils/resource.dart';
 import 'package:flutter/material.dart';
 
+import 'package:arman/model/category.dart';
+
 class ItemWebsite extends StatelessWidget {
-  const ItemWebsite({Key key}) : super(key: key);
+  final SourceWeb sourceWeb;
+  const ItemWebsite({
+    Key key,
+    this.sourceWeb,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +22,19 @@ class ItemWebsite extends StatelessWidget {
           Container(
             child: ClipRRect(
               child: Image.network(
-                "https://rumaysho.com/wp-content/uploads/2017/04/cropped-Master-Logo_Logo-Icon-Rumaysho-Merah_transparan.png",
-                width: 60,
-                height: 60,
+                sourceWeb.logo,
+                width: 50,
+                height: 50,
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          Text("rumaysho")
+          SizedBox(
+            height: 10,
+          ),
+          FittedBox(
+              fit: BoxFit.fitWidth,
+              child: Text(sourceWeb.name)),
         ],
       ),
     );

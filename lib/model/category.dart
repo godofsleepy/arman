@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'category.g.dart';
 
 @JsonSerializable()
@@ -65,7 +66,9 @@ class SourceWeb {
   Map<String, dynamic> toJson() => _$SourceWebToJson(this);
 
   @override
-  String toString() => 'SourceWeb(id: $id, name: $name, logo: $logo)';
+  String toString() {
+    return 'SourceWeb(id: $id, name: $name, logo: $logo, has_interest: $has_interest)';
+  }
 }
 
 @JsonSerializable()
