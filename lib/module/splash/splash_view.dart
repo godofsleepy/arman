@@ -4,6 +4,7 @@ import 'package:arman/utils/resource.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashView extends StatefulWidget {
   SplashView({Key key}) : super(key: key);
@@ -17,20 +18,25 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
 
-    Firebase.initializeApp().whenComplete(() {
-      setState(() {
-        Timer(
-            Duration(seconds: 3),
-            () => Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (context) => LoginView())));
-      });
+    Firebase.initializeApp().whenComplete(() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String user = prefs.getString('user');
+      if (user != null) {
+        setState(() {
+          Timer(
+              Duration(seconds: 3),
+              () => Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => BottomBar())));
+        });
+      } else {
+        setState(() {
+          Timer(
+              Duration(seconds: 3),
+              () => Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => LoginView())));
+        });
+      }
     });
-
-    // Timer(
-    //   Duration(seconds: 3),
-    //   () => Navigator.pushReplacement(
-    //       context, MaterialPageRoute(builder: (context) => LoginView())),
-    // );
   }
 
   @override

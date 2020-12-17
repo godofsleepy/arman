@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-class User {
+class UserAccount {
   String name;
   String accessToken;
   String tokenResult;
@@ -8,8 +8,9 @@ class User {
   String email;
   String provider;
   String image;
+  int expire;
 
-  User({
+  UserAccount({
     this.name,
     this.accessToken,
     this.tokenResult,
@@ -17,11 +18,12 @@ class User {
     this.email,
     this.provider,
     this.image,
+    this.expire,
   });
 
   @override
   String toString() {
-    return 'User(name: $name, accessToken: $accessToken, tokenResult: $tokenResult, refreshToken: $refreshToken, email: $email, provider: $provider, image: $image)';
+    return 'UserAccount(name: $name, accessToken: $accessToken, tokenResult: $tokenResult, refreshToken: $refreshToken, email: $email, provider: $provider, image: $image, expire: $expire)';
   }
 
   Map<String, dynamic> toMap() {
@@ -33,13 +35,14 @@ class User {
       'email': email,
       'provider': provider,
       'image': image,
+      'expire': expire,
     };
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
+  factory UserAccount.fromMap(Map<String, dynamic> map) {
     if (map == null) return null;
   
-    return User(
+    return UserAccount(
       name: map['name'],
       accessToken: map['accessToken'],
       tokenResult: map['tokenResult'],
@@ -47,11 +50,11 @@ class User {
       email: map['email'],
       provider: map['provider'],
       image: map['image'],
+      expire: map['expire'],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory User.fromJson(String source) => User.fromMap(json.decode(source));
+  factory UserAccount.fromJson(String source) => UserAccount.fromMap(json.decode(source));
 }
-

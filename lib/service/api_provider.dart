@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:arman/model/detail.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/model/category.dart';
+import 'package:arman/model/responlogin.dart';
 import 'package:dio/dio.dart';
 
 class ApiProvider {
@@ -54,5 +57,24 @@ class ApiProvider {
     }
   }
 
-  
+  Future<ResponseLogin> postLogin(
+      String email, String access, String provider) async {
+    try {
+      var params = {
+        "grant_type": "social",
+        "client_id": 3,
+        "client_secret": "dSXefk8cq1fnfvptkpnLQtVQF5B3Zo711Mefmg67",
+        "provider": provider,
+        "email": email,
+        "access_token": access,
+        "platform": "Android",
+      };
+
+      final response =
+          await dio.post('$baseUrl/oauth/token', data: jsonEncode(params));
+      return ResponseLogin.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

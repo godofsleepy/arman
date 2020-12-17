@@ -1,10 +1,12 @@
+import 'package:arman/module/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:arman/module/module.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:loading_overlay/loading_overlay.dart';
 
 class LoginView extends StatefulWidget {
   LoginView({Key key}) : super(key: key);
@@ -14,91 +16,123 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final LoginBloc loginBloc = LoginBloc();
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loginBloc..add(LoginEvent());
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90),
-        child: Container(
-            color: Colors.white,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 4, right: 20, left: 20, bottom: 4),
-            child: Text(
-              "Arman",
-              style: TextStyle(color: ResColor.greenColor, fontSize: 24),
-            )),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/login.png",
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ],
-            ),
-            Container(
+    return LoadingOverlay(
+      isLoading: isLoading,
+      color: Colors.transparent,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(90),
+          child: Container(
+              color: Colors.white,
+              alignment: Alignment.center,
+              padding: EdgeInsets.only(top: 4, right: 20, left: 20, bottom: 4),
+              child: Text(
+                "Arman",
+                style: TextStyle(color: ResColor.greenColor, fontSize: 24),
+              )),
+        ),
+        body: BlocProvider<LoginBloc>(
+          create: (context) => loginBloc,
+          child: BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state.status == LoginStatus.success) {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => BottomBar(),
+                    ));
+              } else if (state.status == LoginStatus.loading) {
+                setState(() {
+                  isLoading = true;
+                });
+              } else if (state.status == LoginStatus.failure) {
+                setState(() {
+                  isLoading = false;
+                });
+                Scaffold.of(context)
+                  ..showSnackBar(SnackBar(content: Text(state.message)));
+              }
+            },
+            child: Container(
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+              color: Colors.white,
+              child: Stack(
                 children: [
-                  SizedBox(
-                    height: 90,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        child: Image.asset(
+                          "assets/login.png",
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Ahlan wasahlan",
-                    style: TextStyle(color: ResColor.greenColor, fontSize: 38),
-                  ),
-                  Text(
-                    "login terlebih dahulu untuk melanjutkan.",
-                    style: TextStyle(
-                      color: ResColor.blueColor,
-                      fontSize: 13,
-                    ),
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  SignInButton(
-                    Buttons.Google,
-                    onPressed: () {
-                      signInWithGoogle().then((value) {
-                        value.user
-                            .getIdTokenResult(true)
-                            .then((value) => print("access token : $value"));
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          height: 90,
+                        ),
+                        Text(
+                          "Ahlan wasahlan",
+                          style: TextStyle(
+                              color: ResColor.greenColor, fontSize: 38),
+                        ),
+                        Text(
+                          "login terlebih dahulu untuk melanjutkan.",
+                          style: TextStyle(
+                            color: ResColor.blueColor,
+                            fontSize: 13,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 40,
+                        ),
+                        SignInButton(
+                          Buttons.Google,
+                          onPressed: () {
+                            signInWithGoogle().then((value) {
+                              value.user.getIdToken().then((value) =>
+                                  print("access token user : $value"));
 
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => BottomBar()));
-                      }).catchError((error) => print(error));
-                    },
-                  ),
-                  SignInButton(
-                    Buttons.Facebook,
-                    onPressed: () {
-                      signInWithFacebook().then((value) {
-                        // Navigator.pushReplacement(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => BottomBar(),
-                        //     ));
-                      });
-                    },
+                              value.user.getIdTokenResult().then((value) =>
+                                  print("access tokenresult user : $value"));
+                              print("value ${value.toString()}");
+                            
+                            }).catchError((error) => print(error));
+                          },
+                        ),
+                        SignInButton(
+                          Buttons.Facebook,
+                          onPressed: () {
+                            loginBloc.add(FacebookLoginEvent());
+                          },
+                        )
+                      ],
+                    ),
                   )
                 ],
               ),
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );
@@ -106,11 +140,12 @@ class _LoginViewState extends State<LoginView> {
 
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+    // final userData = await FacebookAuth.instance.getUserData();
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
-    // print("Access Token : ${googleAuth.accessToken}");
-    // print("Id Token : ${googleAuth.idToken}");
+    print("Access Token : ${googleAuth.accessToken}");
+    print("Id Token : ${googleAuth.idToken}");
 
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -119,31 +154,5 @@ class _LoginViewState extends State<LoginView> {
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
-  }
-
-  Future<void> signInWithFacebook() async {
-    try {
-      AccessToken accessToken = await FacebookAuth.instance.login();
-      print("access token : ${accessToken.toJson()}");
-
-      final userData = await FacebookAuth.instance.getUserData();
-      print(userData.entries.elementAt(2).value);
-      print(userData.entries.elementAt(2).value['data']['url'].toString());
-    } catch (e, s) {
-      if (e is FacebookAuthException) {
-        print(e.message);
-        switch (e.errorCode) {
-          case FacebookAuthErrorCode.OPERATION_IN_PROGRESS:
-            print("You have a previous login operation in progress");
-            break;
-          case FacebookAuthErrorCode.CANCELLED:
-            print("login cancelled");
-            break;
-          case FacebookAuthErrorCode.FAILED:
-            print("login failed");
-            break;
-        }
-      }
-    }
   }
 }
