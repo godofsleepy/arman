@@ -12,12 +12,19 @@ class ItemSearch extends StatelessWidget {
       child: ListTile(
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: Image.network(
-            itemRecommendation.thumbnail ?? "",
-            fit: BoxFit.cover,
-            width: 60,
-            height: 60,
-          ),
+          child: itemRecommendation.thumbnail != null
+              ? Image.network(
+                  itemRecommendation.thumbnail,
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: 60,
+                )
+              : Image.asset(
+                  "assets/no_thumbnail.jpeg",
+                  fit: BoxFit.cover,
+                  width: 60,
+                  height: 60,
+                ),
         ),
         title: Text(
           itemRecommendation.title,

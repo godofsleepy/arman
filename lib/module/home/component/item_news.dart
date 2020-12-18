@@ -82,18 +82,23 @@ class ItemNews extends StatelessWidget {
                     height: 8,
                   ),
                   Align(
-                    alignment: Alignment.center,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
-                      child: Image.network(
-                        item.thumbnail ??
-                            "https://cached.imagescaler.hbpl.co.uk/resize/scaleHeight/815/cached.offlinehbpl.hbpl.co.uk/news/OMC/NikeMuslim-20180124014618716.jpg",
-                        height: 180,
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  )
+                      alignment: Alignment.center,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: item.thumbnail != null
+                            ? Image.network(
+                                item.thumbnail,
+                                height: 180,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                "assets/no_thumbnail.jpeg",
+                                height: 180,
+                                width: MediaQuery.of(context).size.width,
+                                fit: BoxFit.cover,
+                              ),
+                      ))
                 ],
               ),
             ),

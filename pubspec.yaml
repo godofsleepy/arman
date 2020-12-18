@@ -70,6 +70,7 @@ flutter:
     - assets/login.png
     - assets/logo.png
     - assets/bg_profile.jpeg
+    - assets/no_thumbnail.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

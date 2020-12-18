@@ -93,12 +93,19 @@ class DetailContent extends StatelessWidget {
                 alignment: Alignment.center,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image.network(
-                    state.data.thumbnail ?? "",
-                    height: 270,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  ),
+                  child: state.data.thumbnail != null
+                      ? Image.network(
+                          state.data.thumbnail,
+                          height: 270,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          "assets/no_thumbnail.jpeg",
+                          height: 270,
+                          width: MediaQuery.of(context).size.width,
+                          fit: BoxFit.cover,
+                        ),
                 ),
               ),
               SizedBox(
