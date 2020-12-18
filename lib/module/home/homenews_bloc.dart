@@ -8,7 +8,6 @@ import 'package:arman/data/data_repository.dart';
 enum HomeNewsStatus { initial, success, failure }
 
 class HomeNewsState extends Equatable {
-
   final HomeNewsStatus status;
   final List<ItemRecommendation> data;
   final bool hasReachedMax;
@@ -61,36 +60,37 @@ class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
     }
   }
 
-  Future<HomeNewsState> mapNewsFetchToState(HomeNewsState state, int page) async {
+  Future<HomeNewsState> mapNewsFetchToState(
+      HomeNewsState state, int page) async {
     if (state.hasReachedMax) return state;
-      try {
-        if (state.status == HomeNewsStatus.initial) {
-          print("initial");
-          final ResponseData responseData =
-              await apiRepository.fetchRecommendation(page);
-          // print("has reached max : ${responseData.data.length}");
-          return state.copyWith(
-            status: HomeNewsStatus.success,
-            data: responseData.data,
-            hasReachedMax: _hasReachedMax(responseData.data.length),
-          );
-        } else {
-          print("else");
-          final ResponseData responseData =
-              await apiRepository.fetchRecommendation(page);
-          // print("has reached max : ${responseData.data.length}");
-          return state.copyWith(
-            status: HomeNewsStatus.success,
-            data: List.of(state.data)..addAll(responseData.data),
-            hasReachedMax: _hasReachedMax(responseData.data.length),
-          );
-        }
-      } on Exception {
-        print("exception");
+    try {
+      if (state.status == HomeNewsStatus.initial) {
+        print("initial");
+        final ResponseData responseData =
+            await apiRepository.fetchRecommendation(page);
+
         return state.copyWith(
-          status: HomeNewsStatus.failure,
+          status: HomeNewsStatus.success,
+          data: responseData.data,
+          hasReachedMax: _hasReachedMax(responseData.data.length),
+        );
+      } else {
+        print("else");
+        final ResponseData responseData =
+            await apiRepository.fetchRecommendation(page);
+
+        return state.copyWith(
+          status: HomeNewsStatus.success,
+          data: List.of(state.data)..addAll(responseData.data),
+          hasReachedMax: _hasReachedMax(responseData.data.length),
         );
       }
+    } on Exception {
+      print("exception");
+      return state.copyWith(
+        status: HomeNewsStatus.failure,
+      );
+    }
   }
 
   bool _hasReachedMax(int postsCount) => postsCount < 10 ? true : false;

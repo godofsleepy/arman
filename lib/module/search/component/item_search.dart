@@ -1,7 +1,9 @@
+import 'package:arman/model/item_recommendation.dart';
 import 'package:flutter/material.dart';
 
 class ItemSearch extends StatelessWidget {
-  const ItemSearch({Key key}) : super(key: key);
+  final ItemRecommendation itemRecommendation;
+  const ItemSearch({Key key, this.itemRecommendation}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,19 +13,19 @@ class ItemSearch extends StatelessWidget {
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: Image.network(
-            "https://images.unsplash.com/photo-1509585585779-17594514ad43?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80",
+            itemRecommendation.thumbnail ?? "",
             fit: BoxFit.cover,
             width: 60,
             height: 60,
           ),
         ),
         title: Text(
-          "Papa green",
+          itemRecommendation.title,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
         subtitle: Text(
-          "Muslim.co.id",
+          itemRecommendation.source,
           style: TextStyle(
             fontSize: 12,
           ),

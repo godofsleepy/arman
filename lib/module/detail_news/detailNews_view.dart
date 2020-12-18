@@ -162,7 +162,7 @@ class DetailContent extends StatelessWidget {
                       // Respond to button press
                     },
                     icon: Icon(Icons.favorite, size: 30),
-                    label: Text("2300 likes"),
+                    label: Text("likes"),
                   ),
                   FlatButton.icon(
                     textColor: ResColor.blueColor,

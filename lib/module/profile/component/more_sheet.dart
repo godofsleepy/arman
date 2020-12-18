@@ -27,7 +27,6 @@ class _MoreSheetState extends State<MoreSheet> {
       create: (context) => profileBloc,
       child: BlocListener<ProfileBloc, ProfileState>(
         listener: (context, state) {
-          print(state.status);
           if (state.status == ProfileStatus.successLogout) {
             Navigator.pop(context);
             Navigator.pushReplacement(

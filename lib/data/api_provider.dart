@@ -66,9 +66,11 @@ class ApiProvider {
       dio.options.headers["Client-Platform"] = "Android";
 
       final response = await dio.get(
-          '$baseUrl/api/content/search?keyword=${keyword.replaceAll(" ", "%20")}');
+          '$baseUrl/api/contents/search?keyword=${keyword.replaceAll(" ", "%20")}');
       return ResponseData.fromJson(response.data);
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
   Future<ResponseLogin> postLogin(
