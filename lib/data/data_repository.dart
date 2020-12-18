@@ -40,4 +40,14 @@ class DataRepository {
       return false;
     }
   }
+
+  Future<UserAccount> getLoginInfo() async {
+    try {
+      String user = await prefs.getString("user");
+      print(user);
+      return UserAccount.fromJson(user);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

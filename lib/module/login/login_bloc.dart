@@ -1,8 +1,6 @@
 import 'package:arman/model/responlogin.dart';
-import 'package:arman/model/user_account.dart';
 import 'package:arman/data/data_repository.dart';
 import 'package:equatable/equatable.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -43,13 +41,14 @@ class GoogleLoginEvent extends LoginEvent {}
 class FacebookLoginEvent extends LoginEvent {}
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final DataRepository apiRepository = DataRepository();
   DataRepository dataRepository;
 
   LoginBloc() : super(LoginState());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
+    dataRepository =
+        DataRepository(prefs: await SharedPreferences.getInstance());
     if (event == GoogleLoginEvent) {
     } else if (event == FacebookLoginEvent()) {
       try {
@@ -105,13 +104,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<bool> loginWithFacebook() async {
     AccessToken accessToken = await FacebookAuth.instance.login();
     final userData = await FacebookAuth.instance.getUserData();
-    final ResponseLogin responseLogin = await apiRepository.fetchLogin(
+    final ResponseLogin responseLogin = await dataRepository.fetchLogin(
         userData.entries.elementAt(1).value.toString(),
         accessToken.token,
         "facebook");
 
-    dataRepository =
-        DataRepository(prefs: await SharedPreferences.getInstance());
     return await dataRepository.saveLogin(
       responseLogin.user.name,
       accessToken.toString(),
