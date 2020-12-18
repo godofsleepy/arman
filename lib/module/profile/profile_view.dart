@@ -271,7 +271,7 @@ class _ProfileViewState extends State<ProfileView> {
                                               topRight: Radius.circular(20),
                                             ),
                                           ),
-                                          builder: (BuildContext context) {
+                                          builder: (context) {
                                             return MoreSheet();
                                           },
                                           context: context,

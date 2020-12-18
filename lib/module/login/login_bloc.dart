@@ -41,14 +41,12 @@ class GoogleLoginEvent extends LoginEvent {}
 class FacebookLoginEvent extends LoginEvent {}
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  DataRepository dataRepository;
+  DataRepository dataRepository = DataRepository();
 
   LoginBloc() : super(LoginState());
 
   @override
   Stream<LoginState> mapEventToState(LoginEvent event) async* {
-    dataRepository =
-        DataRepository(prefs: await SharedPreferences.getInstance());
     if (event == GoogleLoginEvent) {
     } else if (event == FacebookLoginEvent()) {
       try {
@@ -109,7 +107,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         accessToken.token,
         "facebook");
 
-    return await dataRepository.saveLogin(
+    print("${accessToken.token}");
+    return await dataRepository.saveLoginInfo(
       responseLogin.user.name,
       accessToken.toString(),
       responseLogin.user.email,

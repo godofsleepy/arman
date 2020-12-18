@@ -1,6 +1,4 @@
 import 'package:html/parser.dart';
-import 'package:intl/intl.dart';
-import 'dart:convert' show HtmlEscape;
 
 class Utilities {
   static String countDifference(String contentDate) {

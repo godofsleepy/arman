@@ -1,3 +1,4 @@
+import 'package:arman/data/local_provider.dart';
 import 'package:arman/model/category.dart';
 import 'package:arman/model/detail.dart';
 import 'package:arman/model/respondata.dart';
@@ -9,9 +10,9 @@ import 'api_provider.dart';
 
 class DataRepository {
   final ApiProvider apiProvider = ApiProvider();
-  final SharedPreferences prefs;
+  final LocalProvider localProvider = LocalProvider();
 
-  DataRepository({this.prefs});
+  DataRepository();
 
   Future<ResponseData> fetchRecommendation(int page) =>
       apiProvider.getRecomendation(page);
@@ -20,34 +21,13 @@ class DataRepository {
   Future<ResponseLogin> fetchLogin(
           String email, String access, String provider) =>
       apiProvider.postLogin(email, access, provider);
+  Future<ResponseData> fetchSearch(String keyword) =>
+      apiProvider.getSearching(keyword);
 
-  Future<bool> saveLogin(String name, String accessToken, String email,
-      String image, String tokenResult, String refreshToken, int expire) async {
-    try {
-      UserAccount userAccount = UserAccount(
-        name: name,
-        accessToken: accessToken,
-        email: email,
-        image: image,
-        tokenResult: tokenResult,
-        refreshToken: refreshToken,
-        expire: expire,
-      );
-
-      await prefs.setString("user", userAccount.toJson());
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  Future<UserAccount> getLoginInfo() async {
-    try {
-      String user = await prefs.getString("user");
-      print(user);
-      return UserAccount.fromJson(user);
-    } catch (e) {
-      print(e);
-    }
-  }
+  Future<bool> saveLoginInfo(String name, String accessToken, String email,
+          String image, String tokenResult, String refreshToken, int expire) =>
+      localProvider.saveLoginInfo(
+          name, accessToken, email, image, tokenResult, refreshToken, expire);
+  Future<UserAccount> getLoginInfo() => localProvider.getLoginInfo();
+  Future<bool> setLogout() => localProvider.setLogout();
 }

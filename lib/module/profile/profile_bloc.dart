@@ -1,11 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:arman/data/data_repository.dart';
 import 'package:arman/model/user_account.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-enum ProfileStatus { inital, success, failure }
+enum ProfileStatus { inital, success, failure, successLogout }
 
 class ProfileState extends Equatable {
   UserAccount userAccount;
@@ -39,19 +38,25 @@ class ProfileEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LogoutProfile extends ProfileEvent {}
+class LogoutProfileEvent extends ProfileEvent {}
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
-  DataRepository dataRepository;
+  DataRepository dataRepository = DataRepository();
   ProfileBloc() : super(ProfileState());
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
-    dataRepository =
-        DataRepository(prefs: await SharedPreferences.getInstance());
-    if (event == LogoutProfile) {
+    if (event == LogoutProfileEvent()) {
+      bool logout = await dataRepository.setLogout();
+      if (logout) {
+        await FacebookAuth.instance.logOut();
+        yield state.copyWith(
+          userAccount: UserAccount(),
+          message: "Success",
+          status: ProfileStatus.successLogout,
+        );
+      }
     } else {
-      print("run profile");
       UserAccount userAccount = await dataRepository.getLoginInfo();
       yield state.copyWith(
         userAccount: userAccount,
