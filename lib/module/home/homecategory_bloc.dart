@@ -1,5 +1,5 @@
 import 'package:arman/model/category.dart';
-import 'package:arman/service/api_repository.dart';
+import 'package:arman/data/data_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class HomeCategoryState {}
@@ -23,7 +23,7 @@ class HomeCategoryLoaded extends HomeCategoryState {
 class CategoryEvent {}
 
 class CategoryBloc extends Bloc<CategoryEvent, HomeCategoryState> {
-  final ApiRepository apiRepository = ApiRepository();
+  final DataRepository apiRepository = DataRepository();
   CategoryBloc(HomeCategoryState initialState) : super(initialState);
 
   @override

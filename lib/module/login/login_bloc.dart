@@ -1,6 +1,6 @@
 import 'package:arman/model/responlogin.dart';
 import 'package:arman/model/user_account.dart';
-import 'package:arman/service/api_repository.dart';
+import 'package:arman/data/data_repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +43,8 @@ class GoogleLoginEvent extends LoginEvent {}
 class FacebookLoginEvent extends LoginEvent {}
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final ApiRepository apiRepository = ApiRepository();
+  final DataRepository apiRepository = DataRepository();
+  DataRepository dataRepository;
 
   LoginBloc() : super(LoginState());
 
@@ -57,36 +58,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           status: LoginStatus.loading,
         );
 
-        AccessToken accessToken = await FacebookAuth.instance.login();
-        final userData = await FacebookAuth.instance.getUserData();
+        bool success = await loginWithFacebook();
 
-        final FacebookAuthCredential credential =
-            FacebookAuthProvider.credential(accessToken.toString());
-
-         FirebaseAuth.instance.signInWithCredential(credential);
-
-        final ResponseLogin responseLogin = await apiRepository.fetchLogin(
-            userData.entries.elementAt(1).value.toString(),
-            accessToken.token,
-            "facebook");
-
-        UserAccount userAccount = UserAccount(
-          name: userData.entries.elementAt(0).value.toString(),
-          accessToken: accessToken.token,
-          email: userData.entries.elementAt(1).value.toString(),
-          image: userData.entries.elementAt(2).value['data']['url'].toString(),
-          tokenResult: responseLogin.access_token,
-          refreshToken: responseLogin.refresh_token,
-          expire: responseLogin.expires_in,
-        );
-
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        prefs.setString("user", userAccount.toJson());
-
-        yield state.copyWith(
-          message: "Success",
-          status: LoginStatus.success,
-        );
+        if (success) {
+          yield state.copyWith(
+            message: "Success",
+            status: LoginStatus.success,
+          );
+        } else {
+          yield state.copyWith(
+            message: "Failed",
+            status: LoginStatus.failure,
+          );
+        }
       } catch (e, s) {
         if (e is FacebookAuthException) {
           print(e.message);
@@ -116,5 +100,26 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         }
       }
     }
+  }
+
+  Future<bool> loginWithFacebook() async {
+    AccessToken accessToken = await FacebookAuth.instance.login();
+    final userData = await FacebookAuth.instance.getUserData();
+    final ResponseLogin responseLogin = await apiRepository.fetchLogin(
+        userData.entries.elementAt(1).value.toString(),
+        accessToken.token,
+        "facebook");
+
+    dataRepository =
+        DataRepository(prefs: await SharedPreferences.getInstance());
+    return await dataRepository.saveLogin(
+      responseLogin.user.name,
+      accessToken.toString(),
+      responseLogin.user.email,
+      userData.entries.elementAt(2).value['data']['url'].toString(),
+      responseLogin.access_token,
+      responseLogin.refresh_token,
+      responseLogin.expires_in,
+    );
   }
 }

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/model/category.dart';
-import 'package:arman/service/api_repository.dart';
+import 'package:arman/data/data_repository.dart';
 
 enum FollowingStatus { initial, success, failure }
 
@@ -45,7 +45,7 @@ class FollowingEvent extends Equatable {
 class FollowingFetch extends FollowingEvent {}
 
 class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
-  final ApiRepository apiRepository = ApiRepository();
+  final DataRepository apiRepository = DataRepository();
   FollowingBloc() : super(FollowingState());
 
   @override

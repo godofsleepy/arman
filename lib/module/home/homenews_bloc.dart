@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/model/item_recommendation.dart';
 import 'package:arman/model/respondata.dart';
-import 'package:arman/service/api_repository.dart';
+import 'package:arman/data/data_repository.dart';
 
 enum HomeNewsStatus { initial, success, failure }
 
@@ -49,7 +49,7 @@ class HomeNewsFetch extends HomeNewsEvent {
 }
 
 class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
-  final ApiRepository apiRepository = ApiRepository();
+  final DataRepository apiRepository = DataRepository();
 
   NewsBloc() : super(HomeNewsState());
 

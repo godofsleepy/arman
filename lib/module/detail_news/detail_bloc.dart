@@ -1,5 +1,5 @@
 import 'package:arman/model/detail.dart';
-import 'package:arman/service/api_repository.dart';
+import 'package:arman/data/data_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 abstract class DetailState {}
@@ -32,7 +32,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
   DetailBloc(
     initialState,
   ) : super(initialState);
-  ApiRepository apiRepository = ApiRepository();
+  DataRepository apiRepository = DataRepository();
 
   @override
   Stream<DetailState> mapEventToState(DetailEvent event) async* {

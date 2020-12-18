@@ -109,14 +109,14 @@ class _LoginViewState extends State<LoginView> {
                         SignInButton(
                           Buttons.Google,
                           onPressed: () {
-                            signInWithGoogle().then((value) {
-                              value.user.getIdToken().then((value) =>
-                                  print("access token user : $value"));
+                            signInWithGoogle().then((value) async {
+                              value.user.getIdToken().then((value) => print(
+                                  "access token user : ${value.toString()}"));
 
                               value.user.getIdTokenResult().then((value) =>
                                   print("access tokenresult user : $value"));
                               print("value ${value.toString()}");
-                            
+                              await GoogleSignIn().signOut();
                             }).catchError((error) => print(error));
                           },
                         ),
@@ -144,15 +144,15 @@ class _LoginViewState extends State<LoginView> {
 
     final GoogleSignInAuthentication googleAuth =
         await googleUser.authentication;
-    print("Access Token : ${googleAuth.accessToken}");
-    print("Id Token : ${googleAuth.idToken}");
+    // // print("Access Token : ${googleAuth.accessToken}");
+    // print("Id Token : ${googleAuth.idToken}");
 
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
+      accessToken: googleAuth.accessToken,
     );
 
-    // Once signed in, return the UserCredential
+    // // Once signed in, return the UserCredential
     return await FirebaseAuth.instance.signInWithCredential(credential);
   }
 }
