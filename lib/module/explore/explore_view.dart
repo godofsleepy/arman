@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:arman/module/explore/exploreNews_bloc.dart';
+import 'package:arman/module/explore/exploretopic_bloc.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:arman/module/explore/component/tag_populer.dart';
 import 'package:arman/module/module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ExploreView extends StatefulWidget {
   ExploreView({Key key}) : super(key: key);
@@ -14,18 +18,28 @@ class ExploreView extends StatefulWidget {
 
 class _ExploreViewState extends State<ExploreView> {
   ExploreNewsBloc exploreNewsBloc = ExploreNewsBloc();
+  ExploreTopicBloc exploreTopicBloc = ExploreTopicBloc();
+  var random = Random();
 
   @override
   void initState() {
     exploreNewsBloc..add(ExploreNewsEvent());
+    exploreTopicBloc..add(ExploreTopicEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocProvider(
-        create: (context) => exploreNewsBloc,
+      body: MultiBlocProvider(
+        providers: [
+          BlocProvider<ExploreTopicBloc>(
+            create: (context) => exploreTopicBloc,
+          ),
+          BlocProvider<ExploreNewsBloc>(
+            create: (context) => exploreNewsBloc,
+          ),
+        ],
         child: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -92,16 +106,57 @@ class _ExploreViewState extends State<ExploreView> {
                   ),
                   Container(
                     height: 200,
-                    child: ListView.builder(
-                      padding: EdgeInsets.only(bottom: 30),
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: 3,
-                      itemBuilder: (context, index) =>
-                          TagPopuler(index: index + 1),
+                    child: BlocBuilder<ExploreTopicBloc, ExploreTopicState>(
+                      builder: (context, state) {
+                        if (state.status == ExploreTopicStatus.success) {
+                          return ListView.builder(
+                            padding: EdgeInsets.only(bottom: 20),
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: 3,
+                            itemBuilder: (context, index) =>
+                                TagPopuler(index: index + 1, topic: state.data[random.nextInt(16)],),
+                          );
+                        } else {
+                          return Shimmer.fromColors(
+                            child: ListView.builder(
+                                padding: EdgeInsets.only(bottom: 20),
+                                itemCount: 3,
+                                itemBuilder: (context, index) {
+                                  index++;
+                                  return Container(
+                                    child: ListTile(
+                                        leading: Text(
+                                          index.toString(),
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: ResColor.blackColor),
+                                        ),
+                                        title: Material(
+                                          color: ResColor.greyColor,
+                                          child: SizedBox(
+                                            height: 2,
+                                            width: 2,
+                                          ),
+                                        ),
+                                        trailing: Material(
+                                          color: ResColor.greyColor,
+                                          child: SizedBox(
+                                            height: 2,
+                                            width: 2,
+                                          ),
+                                        )),
+                                  );
+                                }),
+                            baseColor: Colors.grey[300],
+                            highlightColor: Colors.grey[100],
+                            enabled: true,
+                          );
+                        }
+                      },
                     ),
                   ),
                   Divider(
-                    height: 40,
+                    height: 10,
                     thickness: 2,
                   ),
                   BlocBuilder<ExploreNewsBloc, ExploreNewsState>(
@@ -113,7 +168,9 @@ class _ExploreViewState extends State<ExploreView> {
                             itemCount: state.data.length,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => ItemNews(item: state.data[index],),
+                            itemBuilder: (context, index) => ItemNews(
+                              item: state.data[index],
+                            ),
                           ),
                         );
                       } else {

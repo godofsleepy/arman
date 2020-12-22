@@ -34,7 +34,7 @@ class LocalProvider {
       print(user);
       return UserAccount.fromJson(user);
     } catch (e) {
-      print(e);
+      print(e); 
     }
   }
 

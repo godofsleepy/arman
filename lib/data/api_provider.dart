@@ -24,7 +24,7 @@ class ApiProvider {
       // print(response.data);
       return ResponseData.fromJson(response.data);
     } catch (e) {
-      print("errorrecomendation ${e}");
+      print("errorrecomendation $e");
       return ResponseData.withError(e.toString());
     }
   }
