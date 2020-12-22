@@ -4,7 +4,7 @@ import 'package:arman/model/respondata.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum SearchStatus { initial, success, failed }
+enum SearchStatus { initial, success, failed, loading }
 
 class SearchState extends Equatable {
   List<ItemRecommendation> data;
@@ -54,7 +54,11 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
   @override
   Stream<SearchState> mapEventToState(SearchEvent event) async* {
     if (event is KeyWordSearchEvent) {
-      print("searching");
+      yield state.copyWith(
+          status: SearchStatus.loading,
+          data: [],
+          message: "",
+        );
       ResponseData responseData =
           await dataRepository.fetchSearch(event.keyword);
       print(responseData.toString());

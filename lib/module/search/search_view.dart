@@ -124,7 +124,7 @@ class _SearchViewState extends State<SearchView> {
                                   ));
                             },
                           ),
-                          itemCount: 8,
+                          itemCount: state.data.length,
                         );
                       } else if (state.status == SearchStatus.failed) {
                       } else {

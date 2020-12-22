@@ -1,6 +1,5 @@
 import 'package:arman/model/item_recommendation.dart';
-import 'package:arman/utils/resource.dart';
-import 'package:arman/utils/utilities.dart';
+import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class ItemNews extends StatelessWidget {

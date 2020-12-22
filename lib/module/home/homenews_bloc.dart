@@ -65,7 +65,6 @@ class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
     if (state.hasReachedMax) return state;
     try {
       if (state.status == HomeNewsStatus.initial) {
-        print("initial");
         final ResponseData responseData =
             await apiRepository.fetchRecommendation(page);
 

@@ -1,11 +1,11 @@
-
 import 'package:arman/model/item_recommendation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:arman/module/module.dart';
 import 'package:arman/utils/utils.dart';
 import '../homenews_bloc.dart';
-import 'item_news.dart';
+
+
 
 class WidgetNews extends StatelessWidget {
   const WidgetNews({
@@ -27,6 +27,7 @@ class WidgetNews extends StatelessWidget {
           color: ResColor.greyColor,
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
+            addAutomaticKeepAlives: true,
             physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(bottom: 50, right: 20, top: 20, left: 20),
             shrinkWrap: true,
@@ -54,7 +55,6 @@ class WidgetNews extends StatelessWidget {
           ),
         );
       } else {
-        print("Loading");
         return Container(
           margin: EdgeInsets.only(top: MediaQuery.of(context).size.height / 3),
           child: CircularProgressIndicator(),

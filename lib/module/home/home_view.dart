@@ -15,13 +15,13 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   final NewsBloc newsBloc = NewsBloc();
-  final CategoryBloc categoryBloc = CategoryBloc(HomeCategoryInitial());
+  final CategoryBloc categoryBloc = CategoryBloc();
   final scrollController = ScrollController();
   int page = 1;
 
   @override
   void initState() {
-    categoryBloc.add(CategoryEvent());
+    categoryBloc..add(HomeCategoryEvent());
     newsBloc..add(HomeNewsFetch(page: page));
     scrollController.addListener(onScroll);
     super.initState();
@@ -94,7 +94,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void onScroll() {
-    if (isBottom) newsBloc.add(HomeNewsFetch(page: page+=1));
+    if (isBottom) newsBloc.add(HomeNewsFetch(page: page += 1));
   }
 
   bool get isBottom {

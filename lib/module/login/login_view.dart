@@ -1,4 +1,3 @@
-import 'package:arman/data/data_repository.dart';
 import 'package:arman/module/login/login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:arman/module/module.dart';
@@ -21,7 +20,7 @@ class _LoginViewState extends State<LoginView> {
   bool isLoading = false;
 
   @override
-  void initState(){
+  void initState() {
     // TODO: implement initState
     super.initState();
     loginBloc..add(LoginEvent());

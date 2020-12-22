@@ -81,7 +81,7 @@ class DetailContent extends StatelessWidget {
     return BlocBuilder<DetailBloc, DetailState>(
       builder: (BuildContext context, state) {
         if (state is DetailLoading) {
-          return WidgetCircularLoading();
+          return CircularLoading();
         } else if (state is DetailFailure) {
           print("error");
           return Container();

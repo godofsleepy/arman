@@ -4,15 +4,12 @@ import 'package:arman/model/detail.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/model/responlogin.dart';
 import 'package:arman/model/user_account.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_provider.dart';
 
 class DataRepository {
   final ApiProvider apiProvider = ApiProvider();
   final LocalProvider localProvider = LocalProvider();
-
-  DataRepository();
 
   Future<ResponseData> fetchRecommendation(int page) =>
       apiProvider.getRecomendation(page);
@@ -23,6 +20,7 @@ class DataRepository {
       apiProvider.postLogin(email, access, provider);
   Future<ResponseData> fetchSearch(String keyword) =>
       apiProvider.getSearching(keyword);
+  Future<ResponseData> fetchContents() => apiProvider.getContents();
 
   Future<bool> saveLoginInfo(String name, String accessToken, String email,
           String image, String tokenResult, String refreshToken, int expire) =>
