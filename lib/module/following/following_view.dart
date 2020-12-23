@@ -1,4 +1,3 @@
-import 'package:arman/model/category.dart';
 import 'package:arman/module/following/following_bloc.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:arman/module/following/component/item_website.dart';
@@ -23,19 +22,6 @@ class _FollowingViewState extends State<FollowingView> {
   }
 
   List<String> tags = [];
-  List<String> options = [
-    'News',
-    'Entertainment',
-    'Politics',
-    'Automotive',
-    'Sports',
-    'Education',
-    'Fashion',
-    'Travel',
-    'Food',
-    'Tech',
-    'Science',
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +52,7 @@ class _FollowingViewState extends State<FollowingView> {
                         Container(
                           margin: EdgeInsets.only(top: 15),
                           width: MediaQuery.of(context).size.width,
-                          height: 330,
+                          height: 350,
                           child: GridView.builder(
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: 9,
@@ -78,7 +64,9 @@ class _FollowingViewState extends State<FollowingView> {
                               mainAxisSpacing: 10,
                             ),
                             itemBuilder: (BuildContext context, int index) =>
-                                ItemWebsite(sourceWeb: state.dataWeb[index],),
+                                ItemWebsite(
+                              sourceWeb: state.dataWeb[index],
+                            ),
                           ),
                         ),
                         Align(
@@ -92,9 +80,9 @@ class _FollowingViewState extends State<FollowingView> {
                           ),
                         ),
                         ChipsChoice<String>.multiple(
-                          value: tags,
+                          value: state.tags,
                           wrapped: true,
-                          onChanged: (val) => setState(() => tags = val),
+                          onChanged: (val) => print(val),
                           choiceItems: C2Choice.listFrom<String, String>(
                             source: state.topicsStr,
                             value: (i, v) => state.dataTopic[i].id.toString(),

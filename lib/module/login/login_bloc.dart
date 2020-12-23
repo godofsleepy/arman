@@ -1,9 +1,9 @@
 import 'package:arman/model/responlogin.dart';
 import 'package:arman/data/data_repository.dart';
+import 'package:arman/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 enum LoginStatus { initial, success, loading, failure }
 
@@ -42,6 +42,7 @@ class FacebookLoginEvent extends LoginEvent {}
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   DataRepository dataRepository = DataRepository();
+  SessionManager sessionManager = SessionManager();
 
   LoginBloc() : super(LoginState());
 
@@ -102,13 +103,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   Future<bool> loginWithFacebook() async {
     AccessToken accessToken = await FacebookAuth.instance.login();
     final userData = await FacebookAuth.instance.getUserData();
-    final ResponseLogin responseLogin = await dataRepository.fetchLogin(
-        userData.entries.elementAt(1).value.toString(),
-        accessToken.token,
-        "facebook");
 
-    print("${accessToken.token}");
-    return await dataRepository.saveLoginInfo(
+    final ResponseLogin responseLogin = await dataRepository.fetchLogin(
+      userData.entries.elementAt(1).value.toString(),
+      accessToken.token,
+      "facebook",
+    );
+
+    print("${responseLogin.access_token}");
+    return await sessionManager.saveLoginInfo(
       responseLogin.user.name,
       accessToken.toString(),
       responseLogin.user.email,

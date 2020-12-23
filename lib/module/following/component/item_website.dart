@@ -1,3 +1,4 @@
+import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:arman/model/category.dart';
@@ -12,10 +13,7 @@ class ItemWebsite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 90,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      width: 100,
       margin: EdgeInsets.all(6),
       child: Column(
         children: [
@@ -33,8 +31,16 @@ class ItemWebsite extends StatelessWidget {
             height: 10,
           ),
           FittedBox(
-              fit: BoxFit.fitWidth,
-              child: Text(sourceWeb.name)),
+            fit: BoxFit.fitWidth,
+            child: Text(
+              sourceWeb.name,
+              style: TextStyle(
+                color: sourceWeb.has_interest == 1
+                    ? ResColor.blueColor
+                    : ResColor.blackColor,
+              ),
+            ),
+          ),
         ],
       ),
     );

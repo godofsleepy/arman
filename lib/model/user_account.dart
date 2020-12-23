@@ -1,14 +1,27 @@
-import 'dart:convert';
+import 'package:hive/hive.dart';
 
-class UserAccount {
+part 'user_account.g.dart';
+
+@HiveType(typeId: 0)
+class UserAccount extends HiveObject {
+  @HiveField(0)
   String name;
+  @HiveField(1)
   String accessToken;
+  @HiveField(2)
   String tokenResult;
+  @HiveField(3)
   String refreshToken;
+  @HiveField(4)
   String email;
+  @HiveField(5)
   String provider;
+  @HiveField(6)
   String image;
+  @HiveField(7)
   int expire;
+  @HiveField(8)
+  String providerExpire;
 
   UserAccount({
     this.name,
@@ -21,40 +34,9 @@ class UserAccount {
     this.expire,
   });
 
+
   @override
   String toString() {
-    return 'UserAccount(name: $name, accessToken: $accessToken, tokenResult: $tokenResult, refreshToken: $refreshToken, email: $email, provider: $provider, image: $image, expire: $expire)';
+    return 'UserAccount(name: $name, accessToken: $accessToken, tokenResult: $tokenResult, refreshToken: $refreshToken, email: $email, provider: $provider, image: $image, expire: $expire, providerExpire: $providerExpire)';
   }
-
-  Map<String, dynamic> toMap() {
-    return {
-      'name': name,
-      'accessToken': accessToken,
-      'tokenResult': tokenResult,
-      'refreshToken': refreshToken,
-      'email': email,
-      'provider': provider,
-      'image': image,
-      'expire': expire,
-    };
-  }
-
-  factory UserAccount.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-  
-    return UserAccount(
-      name: map['name'],
-      accessToken: map['accessToken'],
-      tokenResult: map['tokenResult'],
-      refreshToken: map['refreshToken'],
-      email: map['email'],
-      provider: map['provider'],
-      image: map['image'],
-      expire: map['expire'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory UserAccount.fromJson(String source) => UserAccount.fromMap(json.decode(source));
 }

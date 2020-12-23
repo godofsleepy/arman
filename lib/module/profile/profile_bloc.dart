@@ -1,3 +1,4 @@
+import 'package:arman/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:arman/data/data_repository.dart';
@@ -42,13 +43,15 @@ class LogoutProfileEvent extends ProfileEvent {}
 
 class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   DataRepository dataRepository = DataRepository();
+  SessionManager sessionManager = SessionManager();
   ProfileBloc() : super(ProfileState());
 
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event == LogoutProfileEvent()) {
-      bool logout = await dataRepository.setLogout();
+      bool logout = await sessionManager.setLogout();
       if (logout) {
+        await dataRepository.fetchLogout();
         await FacebookAuth.instance.logOut();
         yield state.copyWith(
           userAccount: UserAccount(),
@@ -57,7 +60,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
         );
       }
     } else {
-      UserAccount userAccount = await dataRepository.getLoginInfo();
+      UserAccount userAccount = await sessionManager.getLoginInfo();
       yield state.copyWith(
         userAccount: userAccount,
         message: "Success",

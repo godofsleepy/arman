@@ -41,6 +41,10 @@ class _SearchViewState extends State<SearchView> {
             title: Container(
               child: TextField(
                 onSubmitted: (value) {
+                  searchBloc.add(KeyWordSearchEvent(keyword: 
+                  value));
+                },
+                onChanged: (value) {
                   searchBloc.add(KeyWordSearchEvent(keyword: value));
                 },
                 autofocus: true,
@@ -115,12 +119,16 @@ class _SearchViewState extends State<SearchView> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) => GestureDetector(
-                            child: ItemSearch(itemRecommendation: state.data[index],),
+                            child: ItemSearch(
+                              itemRecommendation: state.data[index],
+                            ),
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => DetailNewsView(id: state.data[index].id.toString(),),
+                                    builder: (context) => DetailNewsView(
+                                      id: state.data[index].id.toString(),
+                                    ),
                                   ));
                             },
                           ),
@@ -128,11 +136,14 @@ class _SearchViewState extends State<SearchView> {
                         );
                       } else if (state.status == SearchStatus.failed) {
                       } else {
-                        return Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                top: MediaQuery.of(context).size.height / 3),
-                            child: CircularProgressIndicator(),
+                        return Container(
+                          height: MediaQuery.of(context).size.height,
+                          child: Center(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 6),
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
                         );
                       }

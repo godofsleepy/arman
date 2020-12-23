@@ -4,6 +4,7 @@ import 'package:arman/model/detail.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/model/category.dart';
 import 'package:arman/model/responlogin.dart';
+import 'package:arman/model/responpost.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:dio/dio.dart';
 
@@ -12,9 +13,8 @@ class ApiProvider {
   final SessionManager sessionManager = SessionManager();
   final String baseUrl = 'https://app.arman.id';
 
-  Future<ResponseData> getRecomendation(int page) async {
+  Future<ResponseData> getRecomendation(int page, String authorization) async {
     try {
-      String authorization = await sessionManager.getAuthToken();
       print("page : $page");
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
@@ -29,9 +29,8 @@ class ApiProvider {
     }
   }
 
-  Future<ResponseCategory> getCategory() async {
+  Future<ResponseCategory> getCategory(String authorization) async {
     try {
-      String authorization = await sessionManager.getAuthToken();
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 
@@ -44,9 +43,8 @@ class ApiProvider {
     }
   }
 
-  Future<ResponseDetail> getDetail(String id) async {
+  Future<ResponseDetail> getDetail(String id, String authorization) async {
     try {
-      String authorization = await sessionManager.getAuthToken();
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 
@@ -59,9 +57,9 @@ class ApiProvider {
     }
   }
 
-  Future<ResponseData> getSearching(String keyword) async {
+  Future<ResponseData> getSearching(
+      String keyword, String authorization) async {
     try {
-      String authorization = await sessionManager.getAuthToken();
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 
@@ -94,9 +92,46 @@ class ApiProvider {
     }
   }
 
-  Future<ResponseData> getContents() async {
+  Future<ResponsePost> postLogout(String authorization) async {
     try {
-      String authorization = await sessionManager.getAuthToken();
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/users/logout');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<ResponsePost> postFollow(
+      String type, String id, String authorization) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/$type/$id/follow');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<ResponsePost> postUnfollow(
+      String type, String id, String authorization) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/$type/$id/unfollow');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<ResponseData> getContents(String authorization) async {
+    try {
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 

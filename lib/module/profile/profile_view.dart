@@ -18,7 +18,6 @@ class _ProfileViewState extends State<ProfileView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     profileBloc..add(ProfileEvent());
     super.initState();
   }
