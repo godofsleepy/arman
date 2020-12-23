@@ -1,5 +1,6 @@
 import 'package:arman/module/component/component.dart';
 import 'package:arman/module/history/history_bloc.dart';
+import 'package:arman/module/module.dart';
 import 'package:arman/module/search/component/item_search.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -67,11 +68,19 @@ class _HistoryViewState extends State<HistoryView> {
               builder: (context, state) {
                 if (state.status == HistoryStatus.success) {
                   return ListView.builder(
-                    itemCount: state.data.length,
-                    itemBuilder: (context, index) => ItemSearch(
-                      itemRecommendation: state.data[index],
-                    ),
-                  );
+                      itemCount: state.data.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => DetailNewsView(id: state.data[index].id.toString(),)),
+                              );
+                            },
+                            child: ItemSearch(
+                              itemRecommendation: state.data[index],
+                            ),
+                          ));
                 } else {
                   return CircularLoading();
                 }

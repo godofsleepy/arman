@@ -80,9 +80,9 @@ class _FollowingViewState extends State<FollowingView> {
                           ),
                         ),
                         ChipsChoice<String>.multiple(
-                          value: state.tags,
+                          value: tags..addAll(state.tags),
                           wrapped: true,
-                          onChanged: (val) => print(val),
+                          onChanged: (val)  => setState(() => tags = val),
                           choiceItems: C2Choice.listFrom<String, String>(
                             source: state.topicsStr,
                             value: (i, v) => state.dataTopic[i].id.toString(),

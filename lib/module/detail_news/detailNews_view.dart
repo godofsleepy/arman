@@ -15,11 +15,11 @@ class DetailNewsView extends StatefulWidget {
 }
 
 class _DetailNewsViewState extends State<DetailNewsView> {
-  final DetailBloc detailBloc = DetailBloc(DetailInitial());
+  final DetailBloc detailBloc = DetailBloc();
 
   @override
   void initState() {
-    detailBloc.add(DetailEventInitial(widget.id));
+    detailBloc.add(DetailEvent(widget.id));
     super.initState();
   }
 
@@ -81,12 +81,7 @@ class DetailContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<DetailBloc, DetailState>(
       builder: (BuildContext context, state) {
-        if (state is DetailLoading) {
-          return CircularLoading();
-        } else if (state is DetailFailure) {
-          print("error");
-          return Container();
-        } else if (state is DetailLoaded) {
+        if (state.status == DetailStatus.success) {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -222,6 +217,10 @@ class DetailContent extends StatelessWidget {
                 itemCount: state.data.related_articles.length,
               )
             ],
+          );
+        } else {
+          return Container(
+            child: CircularLoading(),
           );
         }
       },

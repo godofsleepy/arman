@@ -1,53 +1,64 @@
-import 'package:arman/model/detail.dart';
-import 'package:arman/data/data_repository.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-abstract class DetailState {}
+import 'package:arman/data/data_repository.dart';
+import 'package:arman/model/detail.dart';
 
-class DetailInitial extends DetailState {}
+enum DetailStatus { initial, success, failure }
 
-class DetailLoading extends DetailState {}
+class DetailState extends Equatable {
+  String message;
+  DetailStatus status;
+  ItemDetail data;
 
-class DetailFailure extends DetailState {
-  final String error;
+  DetailState({
+    this.message = "",
+    this.status = DetailStatus.initial,
+    this.data,
+  });
 
-  DetailFailure(this.error);
+  @override
+  List<Object> get props => [message, status, data];
+
+  @override
+  bool get stringify => true;
+
+  DetailState copyWith({
+    String message,
+    DetailStatus status,
+    ItemDetail data,
+  }) {
+    return DetailState(
+      message: message ?? this.message,
+      status: status ?? this.status,
+      data: data ?? this.data,
+    );
+  }
 }
 
-class DetailLoaded extends DetailState {
-  final ItemDetail data;
-
-  DetailLoaded(this.data);
-}
-
-class DetailEvent {}
-
-class DetailEventInitial extends DetailEvent {
+class DetailEvent extends Equatable {
   final String id;
 
-  DetailEventInitial(this.id);
+  DetailEvent(this.id);
+
+  @override
+  List<Object> get props => [id];
 }
 
 class DetailBloc extends Bloc<DetailEvent, DetailState> {
-  DetailBloc(
-    initialState,
-  ) : super(initialState);
   DataRepository apiRepository = DataRepository();
+
+  DetailBloc() : super(DetailState());
 
   @override
   Stream<DetailState> mapEventToState(DetailEvent event) async* {
-    if(event is DetailEventInitial){
-      yield DetailLoading();
-    print("Loading");
-
-    ResponseDetail data = await apiRepository.fetchDetail(event.id);
-    if (data.success == false) {
-      yield DetailFailure(data.success.toString());
-      print("error");
-      return;
-    }
-    
-    yield DetailLoaded(data.data);
+    ResponseDetail responseDetail = await apiRepository.fetchDetail(event.id);
+    if (responseDetail.success) {
+      yield state.copyWith(
+        data: responseDetail.data,
+        message: "success",
+        status: DetailStatus.success,
+      );
     }
   }
 }
