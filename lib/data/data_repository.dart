@@ -52,4 +52,9 @@ class DataRepository {
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.getHistories(userAccount.tokenResult);
   }
+
+  Future<ResponseData> fetchLikes() async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.getLikes(userAccount.tokenResult);
+  }
 }

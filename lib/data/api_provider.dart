@@ -153,4 +153,16 @@ class ApiProvider {
       print(e.toString());
     }
   }
+
+  Future<ResponseData> getLikes(String authorization) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.get('$baseUrl/api/contents/likes');
+      return ResponseData.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }

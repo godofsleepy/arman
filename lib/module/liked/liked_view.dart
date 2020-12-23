@@ -1,32 +1,31 @@
-import 'package:arman/module/component/component.dart';
-import 'package:arman/module/history/history_bloc.dart';
+import 'package:arman/module/liked/liked_bloc.dart';
 import 'package:arman/module/module.dart';
 import 'package:arman/module/search/component/item_search.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HistoryView extends StatefulWidget {
-  HistoryView({Key key}) : super(key: key);
+class LikedView extends StatefulWidget {
+  LikedView({Key key}) : super(key: key);
 
   @override
-  _HistoryViewState createState() => _HistoryViewState();
+  _LikedViewState createState() => _LikedViewState();
 }
 
-class _HistoryViewState extends State<HistoryView> {
-  final HistoryBloc historyBloc = HistoryBloc();
+class _LikedViewState extends State<LikedView> {
+  final LikedBloc likedBloc = LikedBloc();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    historyBloc..add(HistoryEvent());
+    likedBloc..add(LikedEvent());
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => historyBloc,
+      create: (context) => likedBloc,
       child: Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(50),
@@ -50,7 +49,7 @@ class _HistoryViewState extends State<HistoryView> {
                     width: 20,
                   ),
                   Text(
-                    "History",
+                    "Liked",
                     style: TextStyle(
                       color: ResColor.blackColor,
                       fontSize: 20,
@@ -64,9 +63,9 @@ class _HistoryViewState extends State<HistoryView> {
           body: Container(
             padding: EdgeInsets.only(left: 8, right: 8),
             height: MediaQuery.of(context).size.height,
-            child: BlocBuilder<HistoryBloc, HistoryState>(
+            child: BlocBuilder<LikedBloc, LikedState>(
               builder: (context, state) {
-                if (state.status == HistoryStatus.success) {
+                if (state.status == LikedStatus.success) {
                   return ListView.builder(
                       itemCount: state.data.length,
                       itemBuilder: (context, index) => GestureDetector(

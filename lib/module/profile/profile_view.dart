@@ -158,42 +158,52 @@ class _ProfileViewState extends State<ProfileView> {
                                       SizedBox(
                                         height: 14,
                                       ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: ResColor.whiteColor,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        height: 50,
-                                        padding: EdgeInsets.only(
-                                            top: 8,
-                                            right: 16,
-                                            left: 16,
-                                            bottom: 8),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(Icons.favorite_outline),
-                                                SizedBox(
-                                                  width: 12,
-                                                ),
-                                                Text(
-                                                  "Liked",
-                                                  style: TextStyle(
-                                                      color:
-                                                          ResColor.blackColor,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ],
-                                            ),
-                                            Icon(Icons.keyboard_arrow_right)
-                                          ],
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LikedView()),
+                                          );
+                                        },
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: ResColor.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          height: 50,
+                                          padding: EdgeInsets.only(
+                                              top: 8,
+                                              right: 16,
+                                              left: 16,
+                                              bottom: 8),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.favorite_outline),
+                                                  SizedBox(
+                                                    width: 12,
+                                                  ),
+                                                  Text(
+                                                    "Liked",
+                                                    style: TextStyle(
+                                                        color:
+                                                            ResColor.blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                              Icon(Icons.keyboard_arrow_right)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       Divider(

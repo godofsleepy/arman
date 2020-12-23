@@ -8,3 +8,4 @@ export 'profile/profile_view.dart';
 export 'search/search_view.dart';
 export 'splash/splash_view.dart';
 export 'history/history_view.dart';
+export 'liked/liked_view.dart';
