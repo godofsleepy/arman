@@ -1,20 +1,23 @@
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/detail.dart';
 import 'package:flutter/material.dart';
 
-class ItemSearch extends StatelessWidget {
-  final ItemRecommendation itemRecommendation;
-  const ItemSearch({Key key, this.itemRecommendation}) : super(key: key);
+class ItemRelated extends StatelessWidget {
+  final RelatedArtic relatedArtic;
+
+  const ItemRelated({Key key, this.relatedArtic}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (relatedArtic.content_type != "Article") return Container();
     return Container(
       margin: EdgeInsets.only(bottom: 5),
       child: ListTile(
+        contentPadding: EdgeInsets.zero,
         leading: ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: itemRecommendation.thumbnail != null
+          child: relatedArtic.thumbnail != null
               ? Image.network(
-                  itemRecommendation.thumbnail,
+                  relatedArtic.thumbnail,
                   fit: BoxFit.cover,
                   width: 60,
                   height: 60,
@@ -27,12 +30,12 @@ class ItemSearch extends StatelessWidget {
                 ),
         ),
         title: Text(
-          itemRecommendation.title,
+          relatedArtic.title,
           overflow: TextOverflow.ellipsis,
           maxLines: 1,
         ),
         subtitle: Text(
-          itemRecommendation.source,
+          relatedArtic.source,
           style: TextStyle(
             fontSize: 12,
           ),

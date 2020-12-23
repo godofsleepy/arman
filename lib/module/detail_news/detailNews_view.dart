@@ -1,4 +1,6 @@
+import 'package:arman/module/detail_news/component/item_related.dart';
 import 'package:arman/module/detail_news/detail_bloc.dart';
+import 'package:arman/module/search/component/item_search.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:arman/module/component/circular_loading.dart';
 import 'package:flutter/material.dart';
@@ -165,21 +167,60 @@ class DetailContent extends StatelessWidget {
                 children: [
                   FlatButton.icon(
                     textColor: ResColor.redColor,
-                    onPressed: () {
-                      // Respond to button press
-                    },
-                    icon: Icon(Icons.favorite, size: 30),
-                    label: Text("likes"),
+                    onPressed: () {},
+                    icon: Icon(Icons.favorite_outline, size: 30),
+                    label: Text("like"),
                   ),
                   FlatButton.icon(
                     textColor: ResColor.blueColor,
-                    onPressed: () {
-                      // Respond to button press
-                    },
+                    onPressed: () {},
                     icon: Icon(Icons.share, size: 30),
                     label: Text("share"),
                   ),
                 ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Divider(
+                height: 5,
+                thickness: 1,
+                color: Colors.grey,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Text(
+                "Related Contents",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: ResColor.blackColor,
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) => GestureDetector(
+                  child: ItemRelated(
+                    relatedArtic: state.data.related_articles[index],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailNewsView(
+                            id: state.data.related_articles[index].id
+                                .toString(),
+                          ),
+                        ));
+                  },
+                ),
+                itemCount: state.data.related_articles.length,
               )
             ],
           );

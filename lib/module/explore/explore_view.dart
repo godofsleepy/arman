@@ -113,8 +113,10 @@ class _ExploreViewState extends State<ExploreView> {
                             padding: EdgeInsets.only(bottom: 20),
                             physics: NeverScrollableScrollPhysics(),
                             itemCount: 3,
-                            itemBuilder: (context, index) =>
-                                TagPopuler(index: index + 1, topic: state.data[random.nextInt(16)],),
+                            itemBuilder: (context, index) => TagPopuler(
+                              index: index + 1,
+                              topic: state.data[random.nextInt(16)],
+                            ),
                           );
                         } else {
                           return Shimmer.fromColors(
@@ -158,6 +160,9 @@ class _ExploreViewState extends State<ExploreView> {
                   Divider(
                     height: 10,
                     thickness: 2,
+                  ),
+                  SizedBox(
+                    height: 10,
                   ),
                   BlocBuilder<ExploreNewsBloc, ExploreNewsState>(
                     builder: (context, state) {

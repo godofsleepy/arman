@@ -41,8 +41,7 @@ class _SearchViewState extends State<SearchView> {
             title: Container(
               child: TextField(
                 onSubmitted: (value) {
-                  searchBloc.add(KeyWordSearchEvent(keyword: 
-                  value));
+                  searchBloc.add(KeyWordSearchEvent(keyword: value));
                 },
                 onChanged: (value) {
                   searchBloc.add(KeyWordSearchEvent(keyword: value));
@@ -73,6 +72,7 @@ class _SearchViewState extends State<SearchView> {
           ),
         ),
         body: Container(
+          height: MediaQuery.of(context).size.height,
           width: MediaQuery.of(context).size.width,
           color: ResColor.whiteColor,
           child: Padding(
@@ -118,6 +118,7 @@ class _SearchViewState extends State<SearchView> {
                         return ListView.builder(
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
+                          padding: EdgeInsets.zero,
                           itemBuilder: (context, index) => GestureDetector(
                             child: ItemSearch(
                               itemRecommendation: state.data[index],
@@ -136,15 +137,12 @@ class _SearchViewState extends State<SearchView> {
                         );
                       } else if (state.status == SearchStatus.failed) {
                       } else {
-                        return Container(
-                          height: MediaQuery.of(context).size.height,
-                          child: Center(
-                            child: Container(
-                              margin: EdgeInsets.only(
-                                  top: MediaQuery.of(context).size.height / 6),
-                              child: CircularProgressIndicator(),
-                            ),
-                          ),
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircularLoading(),
+                          ],
                         );
                       }
                     },
