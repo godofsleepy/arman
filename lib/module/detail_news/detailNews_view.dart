@@ -1,6 +1,5 @@
 import 'package:arman/module/detail_news/component/item_related.dart';
 import 'package:arman/module/detail_news/detail_bloc.dart';
-import 'package:arman/module/search/component/item_search.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:arman/module/component/circular_loading.dart';
 import 'package:flutter/material.dart';

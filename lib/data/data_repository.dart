@@ -47,4 +47,9 @@ class DataRepository {
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.postLogout(userAccount.tokenResult);
   }
+
+  Future<ResponseData> fetchHistories() async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.getHistories(userAccount.tokenResult);
+  }
 }

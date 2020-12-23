@@ -1,5 +1,5 @@
 export 'component/component.dart';
-export 'detail_news/detailNews_view.dart';
+export 'detail_news/detailnews_view.dart';
 export 'explore/explore_view.dart';
 export 'following/following_view.dart';
 export 'home/home_view.dart';
@@ -7,3 +7,4 @@ export 'login/login_view.dart';
 export 'profile/profile_view.dart';
 export 'search/search_view.dart';
 export 'splash/splash_view.dart';
+export 'history/history_view.dart';

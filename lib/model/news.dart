@@ -32,5 +32,5 @@ class News {
 
   factory News.fromJson(Map<String, dynamic> json) => _$NewsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$newsToJson(this);
+  Map<String, dynamic> toJson() => _$NewsToJson(this);
 }

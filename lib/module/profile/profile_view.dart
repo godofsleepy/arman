@@ -1,3 +1,4 @@
+import 'package:arman/module/module.dart';
 import 'package:arman/module/profile/profile_bloc.dart';
 import 'package:arman/utils/resource.dart';
 import 'package:flutter/material.dart';
@@ -109,42 +110,49 @@ class _ProfileViewState extends State<ProfileView> {
                                   padding: EdgeInsets.only(left: 20, right: 20),
                                   child: Column(
                                     children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          color: ResColor.whiteColor,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        height: 50,
-                                        padding: EdgeInsets.only(
-                                            top: 8,
-                                            right: 16,
-                                            left: 16,
-                                            bottom: 8),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Icon(Icons.history),
-                                                SizedBox(
-                                                  width: 12,
-                                                ),
-                                                Text(
-                                                  "History",
-                                                  style: TextStyle(
-                                                      color:
-                                                          ResColor.blackColor,
-                                                      fontWeight:
-                                                          FontWeight.w600),
-                                                ),
-                                              ],
-                                            ),
-                                            Icon(Icons.keyboard_arrow_right)
-                                          ],
+                                      GestureDetector(
+                                        onTap: () => Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    HistoryView())),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color: ResColor.whiteColor,
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                          ),
+                                          height: 50,
+                                          padding: EdgeInsets.only(
+                                              top: 8,
+                                              right: 16,
+                                              left: 16,
+                                              bottom: 8),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Icon(Icons.history),
+                                                  SizedBox(
+                                                    width: 12,
+                                                  ),
+                                                  Text(
+                                                    "History",
+                                                    style: TextStyle(
+                                                        color:
+                                                            ResColor.blackColor,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                                  ),
+                                                ],
+                                              ),
+                                              Icon(Icons.keyboard_arrow_right)
+                                            ],
+                                          ),
                                         ),
                                       ),
                                       SizedBox(

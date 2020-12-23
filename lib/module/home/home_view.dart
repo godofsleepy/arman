@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'component/widgetNews.dart';
+import 'component/widgetnews.dart';
 import 'homenews_bloc.dart';
 import 'package:arman/utils/utils.dart';
 import 'homecategory_bloc.dart';
-import 'component/widgetCategory.dart';
+import 'component/widgetcategory.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
