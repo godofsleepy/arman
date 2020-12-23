@@ -1,4 +1,4 @@
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/news.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:arman/module/module.dart';
@@ -21,7 +21,7 @@ class WidgetNews extends StatelessWidget {
         print("failure");
         return Container();
       } else if (state.status == HomeNewsStatus.success) {
-        List<ItemRecommendation> responseData = state.data;
+        List<News> responseData = state.data;
         print("Data");
         return Container(
           color: ResColor.greyColor,

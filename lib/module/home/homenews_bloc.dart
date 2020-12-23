@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/news.dart';
 import 'package:arman/model/respondata.dart';
 import 'package:arman/data/data_repository.dart';
 
@@ -9,18 +9,18 @@ enum HomeNewsStatus { initial, success, failure }
 
 class HomeNewsState extends Equatable {
   final HomeNewsStatus status;
-  final List<ItemRecommendation> data;
+  final List<News> data;
   final bool hasReachedMax;
 
   HomeNewsState({
     this.status = HomeNewsStatus.initial,
-    this.data = const <ItemRecommendation>[],
+    this.data = const <News>[],
     this.hasReachedMax = false,
   });
 
   HomeNewsState copyWith({
     HomeNewsStatus status,
-    List<ItemRecommendation> data,
+    List<News> data,
     bool hasReachedMax,
   }) {
     return HomeNewsState(

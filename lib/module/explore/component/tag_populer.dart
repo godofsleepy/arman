@@ -9,26 +9,32 @@ class TagPopuler extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (topic.has_interest == 0)
-      return Container(
-        child: ListTile(
-          leading: Text(
-            index.toString(),
-            style: TextStyle(fontSize: 20, color: ResColor.blackColor),
-          ),
-          title: Text(
-            topic.name,
-            style: TextStyle(color: ResColor.blackColor),
-          ),
-          trailing: FlatButton.icon(
-            textColor: ResColor.blueColor,
-            onPressed: () {
-              // Respond to button press
-            },
-            icon: Icon(Icons.add, size: 18),
-            label: Text("follow"),
-          ),
+    return Container(
+      child: ListTile(
+        leading: Text(
+          index.toString(),
+          style: TextStyle(fontSize: 20, color: ResColor.blackColor),
         ),
-      );
+        title: Text(
+          topic.name,
+          style: TextStyle(color: ResColor.blackColor),
+        ),
+        trailing: topic.has_interest == 0
+            ? FlatButton.icon(
+                textColor: ResColor.blueColor,
+                onPressed: () {
+                  // Respond to button press
+                },
+                icon: Icon(Icons.add, size: 18),
+                label: Text("follow"),
+              )
+            : Text(
+                "followed",
+                style: TextStyle(
+                  color: ResColor.blueColor,
+                ),
+              ),
+      ),
+    );
   }
 }

@@ -1,9 +1,9 @@
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/news.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class ItemNews extends StatelessWidget {
-  final ItemRecommendation item;
+  final News item;
 
   const ItemNews({Key key, this.item}) : super(key: key);
 

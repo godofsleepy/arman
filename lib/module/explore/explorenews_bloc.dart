@@ -3,12 +3,12 @@ import 'package:arman/model/respondata.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/news.dart';
 
 enum ExploreNewsStatus { initial, success, failed }
 
 class ExploreNewsState extends Equatable {
-  List<ItemRecommendation> data;
+  List<News> data;
   String message;
   ExploreNewsStatus status;
 
@@ -25,7 +25,7 @@ class ExploreNewsState extends Equatable {
   bool get stringify => true;
 
   ExploreNewsState copyWith({
-    List<ItemRecommendation> data,
+    List<News> data,
     String message,
     ExploreNewsStatus status,
   }) {

@@ -1,8 +1,8 @@
-import 'package:arman/model/item_recommendation.dart';
+import 'package:arman/model/news.dart';
 import 'package:flutter/material.dart';
 
 class ItemSearch extends StatelessWidget {
-  final ItemRecommendation itemRecommendation;
+  final News itemRecommendation;
   const ItemSearch({Key key, this.itemRecommendation}) : super(key: key);
 
   @override
