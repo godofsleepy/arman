@@ -1,5 +1,5 @@
 export 'component/component.dart';
-export 'detail_news/detailnews_view.dart';
+export 'detail/detail_view.dart';
 export 'explore/explore_view.dart';
 export 'following/following_view.dart';
 export 'home/home_view.dart';

@@ -1,35 +1,23 @@
-import 'dart:convert';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'responpost.g.dart';
+
+@JsonSerializable()
 class ResponsePost {
-  bool succees;
+  bool success;
   String message;
 
   ResponsePost({
-    this.succees,
+    this.success,
     this.message,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'succees': succees,
-      'message': message,
-    };
-  }
+  factory ResponsePost.fromJson(Map<String, dynamic> json) =>
+      _$ResponsePostFromJson(json);
 
-  factory ResponsePost.fromMap(Map<String, dynamic> map) {
-    if (map == null) return null;
-
-    return ResponsePost(
-      succees: map['succees'],
-      message: map['message'],
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ResponsePost.fromJson(String source) =>
-      ResponsePost.fromMap(json.decode(source));
+  Map<String, dynamic> toJson() => _$ResponsePostToJson(this);
 
   @override
-  String toString() => 'ResponsePost(succees: $succees, message: $message)';
+  String toString() => 'ResponsePost(success: $success, message: $message)';
 }

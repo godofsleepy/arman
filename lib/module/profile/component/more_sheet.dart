@@ -16,7 +16,6 @@ class _MoreSheetState extends State<MoreSheet> {
 
   @override
   void initState() {
-    // TODO: implement initState
     profileBloc..add(ProfileEvent());
     super.initState();
   }

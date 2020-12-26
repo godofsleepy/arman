@@ -5,8 +5,6 @@ import 'package:arman/module/module.dart';
 import 'package:arman/utils/utils.dart';
 import '../homenews_bloc.dart';
 
-
-
 class WidgetNews extends StatelessWidget {
   const WidgetNews({
     Key key,
@@ -22,7 +20,7 @@ class WidgetNews extends StatelessWidget {
         return Container();
       } else if (state.status == HomeNewsStatus.success) {
         List<News> responseData = state.data;
-        print("Data");
+
         return Container(
           color: ResColor.greyColor,
           width: MediaQuery.of(context).size.width,
@@ -35,7 +33,6 @@ class WidgetNews extends StatelessWidget {
                 ? responseData.length
                 : responseData.length + 1,
             itemBuilder: (context, index) {
-              print("data length : ${responseData.length}");
               return index >= responseData.length
                   ? BottomLoader()
                   : GestureDetector(

@@ -27,8 +27,6 @@ class SessionManager {
     try {
       var box = await Hive.openBox('userBox');
       UserAccount userAccount = box.getAt(0);
-      print(userAccount.toString());
-
       return userAccount;
     } catch (e) {
       print(e);

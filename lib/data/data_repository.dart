@@ -57,4 +57,14 @@ class DataRepository {
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.getLikes(userAccount.tokenResult);
   }
+
+  Future<ResponsePost> fetchLike(String id) async {
+       UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postLike(userAccount.tokenResult, id);
+  }
+
+  Future<ResponsePost> fetchUnlike(String id) async {
+       UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postUnlike(userAccount.tokenResult, id);
+  }
 }

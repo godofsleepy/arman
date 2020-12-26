@@ -15,7 +15,6 @@ class ApiProvider {
 
   Future<ResponseData> getRecomendation(int page, String authorization) async {
     try {
-      print("page : $page");
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 
@@ -161,6 +160,30 @@ class ApiProvider {
 
       final response = await dio.get('$baseUrl/api/contents/likes');
       return ResponseData.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<ResponsePost> postLike(String authorization, String id) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/contents/$id/like');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+  Future<ResponsePost> postUnlike(String authorization, String id) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/contents/$id/unlike');
+      return ResponsePost.fromJson(response.data);
     } catch (e) {
       print(e.toString());
     }

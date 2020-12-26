@@ -1,3 +1,4 @@
+import 'package:arman/model/responpost.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,12 +50,11 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   @override
   Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
     if (event == LogoutProfileEvent()) {
-      bool logout = await sessionManager.setLogout();
-      if (logout) {
-        await dataRepository.fetchLogout();
+      ResponsePost logout = await dataRepository.fetchLogout();
+      if (logout.success) {
         await FacebookAuth.instance.logOut();
+        await sessionManager.setLogout();
         yield state.copyWith(
-          userAccount: UserAccount(),
           message: "Success",
           status: ProfileStatus.successLogout,
         );

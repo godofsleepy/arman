@@ -54,7 +54,7 @@ class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
 
   @override
   Stream<HomeNewsState> mapEventToState(HomeNewsEvent event) async* {
-    print("start");
+    
     if (event is HomeNewsFetch) {
       yield await mapNewsFetchToState(state, event.page);
     }
@@ -74,7 +74,7 @@ class NewsBloc extends Bloc<HomeNewsEvent, HomeNewsState> {
           hasReachedMax: _hasReachedMax(responseData.data.length),
         );
       } else {
-        print("else");
+        
         final ResponseData responseData =
             await apiRepository.fetchRecommendation(page);
 
