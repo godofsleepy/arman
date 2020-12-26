@@ -50,7 +50,7 @@ class DetailLikeEvent extends DetailEvent {
   DetailLikeEvent(String id) : super(id);
 }
 
-class DetailUnlikeEvent extends DetailLikeEvent {
+class DetailUnlikeEvent extends DetailEvent {
   DetailUnlikeEvent(String id) : super(id);
 }
 
@@ -61,7 +61,9 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
 
   @override
   Stream<DetailState> mapEventToState(DetailEvent event) async* {
+    print("event : $event");
     if (event is DetailLikeEvent) {
+      print("run like");
       ResponsePost responsePost = await apiRepository.fetchLike(event.id);
       if (responsePost.success != null && responsePost.success == false) {
         yield state.copyWith(
@@ -69,7 +71,7 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
         );
       }
     } else if (event is DetailUnlikeEvent) {
-      print("run");
+      print("run unlike");
       ResponsePost responsePost = await apiRepository.fetchUnlike(event.id);
       print(responsePost.message);
       if (responsePost.success != null && responsePost.success == false) {
