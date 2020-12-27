@@ -1,6 +1,5 @@
 import 'package:arman/module/liked/liked_bloc.dart';
 import 'package:arman/module/module.dart';
-import 'package:arman/module/search/component/item_search.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

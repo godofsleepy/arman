@@ -4,7 +4,7 @@ import 'package:arman/module/module.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'component/recent_search.dart';
-import 'component/item_search.dart';
+
 
 class SearchView extends StatefulWidget {
   SearchView({Key key}) : super(key: key);

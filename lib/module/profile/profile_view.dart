@@ -225,7 +225,14 @@ class _ProfileViewState extends State<ProfileView> {
                                           IconButton(
                                             icon: Icon(
                                                 Icons.keyboard_arrow_right),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        BookmarkView()),
+                                              );
+                                            },
                                           )
                                         ],
                                       ),

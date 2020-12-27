@@ -74,4 +74,14 @@ class DataRepository {
     return apiProvider.getNewsbySource(
         sourceId, page.toString(), userAccount.tokenResult);
   }
+
+  Future<ResponsePost> fetchFollow(String type, String id) async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postFollow(type, id, userAccount.tokenResult);
+  }
+
+  Future<ResponsePost> fetchUnfollow(String type, String id) async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postUnfollow(type, id, userAccount.tokenResult);
+  }
 }
