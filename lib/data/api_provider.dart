@@ -129,6 +129,19 @@ class ApiProvider {
     }
   }
 
+  Future<ResponseData> getNewsbySource(
+      String sourceId, String page, String authorization) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.get('$baseUrl/api/contents/?source_id=$sourceId&page=$page');
+      return ResponseData.fromJson(response.data);
+    } catch (e) {
+      print(e);
+    }
+  }
+
   Future<ResponseData> getContents(String authorization) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $authorization";

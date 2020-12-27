@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 
 class ItemCategory extends StatelessWidget {
   final int index;
+  final bool selected;
   final SourceWeb sourceWeb;
-  const ItemCategory({Key key, this.index, this.sourceWeb}) : super(key: key);
+  const ItemCategory({Key key, this.index, this.sourceWeb, this.selected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +37,11 @@ class ItemCategory extends StatelessWidget {
                 ),
                 Text(
                   "For You",
-                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
+                  style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 12,
+                      color:
+                          selected ? ResColor.blueColor : ResColor.blackColor),
                 )
               ],
             ),
@@ -56,8 +62,12 @@ class ItemCategory extends StatelessWidget {
                     ),
                     Text(
                       sourceWeb.name,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w300, fontSize: 12),
+                      style: TextStyle(
+                        color:
+                            selected ? ResColor.blueColor : ResColor.blackColor,
+                        fontWeight: FontWeight.w300,
+                        fontSize: 12,
+                      ),
                     )
                   ],
                 ),

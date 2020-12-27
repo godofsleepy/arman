@@ -13,14 +13,10 @@ class WidgetNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NewsBloc, HomeNewsState>(builder: (context, state) {
-      print(state.data);
-
       if (state.status == HomeNewsStatus.failure) {
         print("failure");
         return Container();
       } else if (state.status == HomeNewsStatus.success) {
-        List<News> responseData = state.data;
-
         return Container(
           color: ResColor.greyColor,
           width: MediaQuery.of(context).size.width,
@@ -29,11 +25,10 @@ class WidgetNews extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.only(bottom: 50, right: 20, top: 20, left: 20),
             shrinkWrap: true,
-            itemCount: state.hasReachedMax
-                ? responseData.length
-                : responseData.length + 1,
+            itemCount:
+                state.hasReachedMax ? state.data.length : state.data.length + 1,
             itemBuilder: (context, index) {
-              return index >= responseData.length
+              return index >= state.data.length
                   ? BottomLoader()
                   : GestureDetector(
                       onTap: () {
@@ -41,11 +36,11 @@ class WidgetNews extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => DetailNewsView(
-                                      id: responseData[index].id.toString(),
+                                      id: state.data[index].id.toString(),
                                     )));
                       },
                       child: ItemNews(
-                        item: responseData[index],
+                        item: state.data[index],
                       ),
                     );
             },

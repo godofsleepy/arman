@@ -15,6 +15,7 @@ class DataRepository {
   final LocalProvider localProvider = LocalProvider();
 
   Future<ResponseData> fetchRecommendation(int page) async {
+    print("page : $page");
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.getRecomendation(page, userAccount.tokenResult);
   }
@@ -59,12 +60,18 @@ class DataRepository {
   }
 
   Future<ResponsePost> fetchLike(String id) async {
-       UserAccount userAccount = await sessionManager.getLoginInfo();
+    UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.postLike(userAccount.tokenResult, id);
   }
 
   Future<ResponsePost> fetchUnlike(String id) async {
-       UserAccount userAccount = await sessionManager.getLoginInfo();
+    UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.postUnlike(userAccount.tokenResult, id);
+  }
+
+  Future<ResponseData> fetchNewsbySource(String sourceId, int page) async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.getNewsbySource(
+        sourceId, page.toString(), userAccount.tokenResult);
   }
 }

@@ -38,7 +38,6 @@ class HomeCategoryState extends Equatable {
 
 class HomeCategoryEvent extends Equatable {
   @override
-  // TODO: implement props
   List<Object> get props => [];
 }
 

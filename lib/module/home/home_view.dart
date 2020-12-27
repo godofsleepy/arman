@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shimmer/shimmer.dart';
+import 'component/item_category.dart';
 import 'component/widgetnews.dart';
 import 'homenews_bloc.dart';
 import 'package:arman/utils/utils.dart';
 import 'homecategory_bloc.dart';
-import 'component/widgetcategory.dart';
 
 class HomeView extends StatefulWidget {
   HomeView({Key key}) : super(key: key);
@@ -18,11 +19,12 @@ class _HomeViewState extends State<HomeView> {
   final CategoryBloc categoryBloc = CategoryBloc();
   final scrollController = ScrollController();
   int page = 1;
+  int selected = 0;
 
   @override
   void initState() {
     categoryBloc..add(HomeCategoryEvent());
-    newsBloc..add(HomeNewsFetch(page: page));
+    newsBloc..add(HomeNewsFetch(sourceId: "0"));
     scrollController.addListener(onScroll);
     super.initState();
   }
@@ -76,7 +78,71 @@ class _HomeViewState extends State<HomeView> {
                 width: MediaQuery.of(context).size.width,
                 height: 70,
                 color: Colors.white,
-                child: WidgetCategory(),
+                child: BlocBuilder<CategoryBloc, HomeCategoryState>(
+                    builder: (context, state) {
+                  if (state.status == HomeCategoryStatus.success) {
+                    return ListView.builder(
+                      addAutomaticKeepAlives: true,
+                      padding: EdgeInsets.only(left: 16, top: 4),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: state.sourceWeb.length,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selected = index;
+                          });
+
+                          if (index != 0) {
+                            newsBloc.add(HomeNewsFetch(
+                                sourceId:
+                                    state.sourceWeb[index].id.toString()));
+                          } else {
+                            newsBloc.add(HomeNewsFetch(sourceId: "0"));
+                          }
+                        },
+                        child: ItemCategory(
+                          selected: selected == index ? true : false,
+                          index: index,
+                          sourceWeb: state.sourceWeb[index],
+                        ),
+                      ),
+                    );
+                  } else if (state.status == HomeCategoryStatus.failure) {
+                    return Container(
+                      child: Text("error"),
+                    );
+                  } else {
+                    return Shimmer.fromColors(
+                      child: ListView.builder(
+                          padding: EdgeInsets.only(left: 16, top: 4),
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: Column(
+                                  children: [
+                                    ClipOval(
+                                      child: Material(
+                                        color:
+                                            ResColor.greenColor, // button color
+                                        child: SizedBox(
+                                          width: 40,
+                                          height: 40,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2,
+                                    ),
+                                  ],
+                                ),
+                              )),
+                      baseColor: Colors.grey[300],
+                      highlightColor: Colors.grey[100],
+                      enabled: true,
+                    );
+                  }
+                }),
               ),
               WidgetNews(),
             ],
@@ -94,7 +160,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void onScroll() {
-    if (isBottom) newsBloc.add(HomeNewsFetch(page: page += 1));
+    if (isBottom) newsBloc.add(HomeNewsFetch(sourceId: ""));
   }
 
   bool get isBottom {
