@@ -36,7 +36,9 @@ class _FollowingViewState extends State<FollowingView> {
               child: BlocBuilder<FollowingBloc, FollowingState>(
                 builder: (context, state) {
                   if (state.status == FollowingStatus.success) {
-                    // state.dataTopic.map((val) => print(val.name));
+                    // state.tags.forEach((element) {
+                    //   tags.add(element.toString());
+                    // });
                     return Column(
                       children: [
                         Align(
@@ -64,8 +66,27 @@ class _FollowingViewState extends State<FollowingView> {
                               mainAxisSpacing: 10,
                             ),
                             itemBuilder: (BuildContext context, int index) =>
-                                ItemWebsite(
-                              sourceWeb: state.dataWeb[index],
+                                GestureDetector(
+                              onTap: () {
+                                if (state.dataWeb[index].has_interest == 1) {
+                                  followingBloc.add(FollowingEventUnfollow(
+                                      type: "sources",
+                                      id: state.dataWeb[index].id.toString()));
+                                  setState(() {
+                                    state.dataWeb[index].has_interest = 0;
+                                  });
+                                } else {
+                                  followingBloc.add(FollowingEventFollow(
+                                      type: "sources",
+                                      id: state.dataWeb[index].id.toString()));
+                                  setState(() {
+                                    state.dataWeb[index].has_interest = 1;
+                                  });
+                                }
+                              },
+                              child: ItemWebsite(
+                                sourceWeb: state.dataWeb[index],
+                              ),
                             ),
                           ),
                         ),
@@ -82,7 +103,12 @@ class _FollowingViewState extends State<FollowingView> {
                         ChipsChoice<String>.multiple(
                           value: tags..addAll(state.tags),
                           wrapped: true,
-                          onChanged: (val)  => setState(() => tags = val),
+                          onChanged: (val) {
+                            print(val);
+                            setState(() => tags = val);
+                            // followingBloc.add(FollowingEventFollow(
+                            //     type: "topics", id: val.last));
+                          },
                           choiceItems: C2Choice.listFrom<String, String>(
                             source: state.topicsStr,
                             value: (i, v) => state.dataTopic[i].id.toString(),

@@ -1,10 +1,11 @@
+import 'package:arman/model/response_post.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/data/data_repository.dart';
 import 'package:arman/model/response_category.dart';
 
-enum FollowingStatus { initial, success, failure }
+enum FollowingStatus { initial, success, failure, loading }
 
 class FollowingState extends Equatable {
   FollowingStatus status;
@@ -57,7 +58,23 @@ class FollowingEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class FollowingFetch extends FollowingEvent {}
+class FollowingEventFollow extends FollowingEvent {
+  final String type;
+  final String id;
+  FollowingEventFollow({
+    this.type,
+    this.id,
+  });
+}
+
+class FollowingEventUnfollow extends FollowingEvent {
+  final String type;
+  final String id;
+  FollowingEventUnfollow({
+    this.type,
+    this.id,
+  });
+}
 
 class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
   final DataRepository apiRepository = DataRepository();
@@ -65,6 +82,22 @@ class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
 
   @override
   Stream<FollowingState> mapEventToState(FollowingEvent event) async* {
+    if (event is FollowingEventFollow) {
+      final ResponsePost responsePost =
+          await apiRepository.fetchFollow(event.type, event.id);
+      print(responsePost.success);
+    } else if (event is FollowingEventUnfollow) {
+      final ResponsePost responsePost =
+          await apiRepository.fetchUnfollow(event.type, event.id);
+      if (responsePost.success) {
+        yield await mapFollowingFetchtoState();
+      }
+    } else {
+      yield await mapFollowingFetchtoState();
+    }
+  }
+
+  Future<FollowingState> mapFollowingFetchtoState() async {
     try {
       List<String> topicsStr = [];
       List<String> tags = [];
@@ -78,7 +111,7 @@ class FollowingBloc extends Bloc<FollowingEvent, FollowingState> {
           topicsStr.add(value.name);
         });
 
-        yield state.copyWith(
+        return state.copyWith(
           status: FollowingStatus.success,
           dataTopic: responseCategory.data.topics,
           dataWeb: responseCategory.data.sources,
