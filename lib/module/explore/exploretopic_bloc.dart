@@ -1,7 +1,7 @@
 import 'package:arman/data/data_repository.dart';
 import 'package:equatable/equatable.dart';
 
-import 'package:arman/model/category.dart';
+import 'package:arman/model/response_category.dart';
 import 'package:arman/model/news.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

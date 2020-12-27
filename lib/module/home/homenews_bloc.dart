@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/data/data_repository.dart';
 import 'package:arman/model/news.dart';
-import 'package:arman/model/respondata.dart';
+import 'package:arman/model/response_data.dart';
 
 enum HomeNewsStatus { initial, success, failure, loading }
 

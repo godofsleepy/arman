@@ -1,7 +1,7 @@
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'responpost.g.dart';
+part 'response_post.g.dart';
 
 @JsonSerializable()
 class ResponsePost {

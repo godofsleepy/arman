@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'detail.g.dart';
+part 'response_detail.g.dart';
 
 @JsonSerializable()
 class ResponseDetail {
   bool success;
-  ItemDetail data;
+  Detail data;
   String message;
   @JsonKey(ignore: true)
   String error;
@@ -29,7 +29,7 @@ class ResponseDetail {
 }
 
 @JsonSerializable()
-class ItemDetail {
+class Detail {
   int id;
   String content_type;
   String content_date;
@@ -41,9 +41,9 @@ class ItemDetail {
   bool read;
   bool liked;
   bool bookmarked;
-  List<RelatedArtic> related_articles;
+  List<RelatedArticle> related_articles;
 
-  ItemDetail({
+  Detail({
     this.id,
     this.content_type,
     this.content_date,
@@ -58,19 +58,19 @@ class ItemDetail {
     this.related_articles,
   });
 
-  factory ItemDetail.fromJson(Map<String, dynamic> json) =>
-      _$ItemDetailFromJson(json);
+  factory Detail.fromJson(Map<String, dynamic> json) =>
+      _$DetailFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ItemDetailToJson(this);
+  Map<String, dynamic> toJson() => _$DetailToJson(this);
 
   @override
   String toString() {
-    return 'ItemDetail(id: $id, content_type: $content_type, content_date: $content_date, thumbnail: $thumbnail, title: $title, content: $content, source: $source, source_logo: $source_logo, read: $read, liked: $liked, bookmarked: $bookmarked, related_articles: $related_articles)';
+    return 'Detail(id: $id, content_type: $content_type, content_date: $content_date, thumbnail: $thumbnail, title: $title, content: $content, source: $source, source_logo: $source_logo, read: $read, liked: $liked, bookmarked: $bookmarked, related_articles: $related_articles)';
   }
 }
 
 @JsonSerializable()
-class RelatedArtic {
+class RelatedArticle {
   int id;
   String content_type;
   String title;
@@ -78,7 +78,7 @@ class RelatedArtic {
   String source;
   bool read;
 
-  RelatedArtic({
+  RelatedArticle({
     this.id,
     this.content_type,
     this.title,
@@ -87,13 +87,13 @@ class RelatedArtic {
     this.read,
   });
 
-  factory RelatedArtic.fromJson(Map<String, dynamic> json) =>
-      _$RelatedArticFromJson(json);
+  factory RelatedArticle.fromJson(Map<String, dynamic> json) =>
+      _$RelatedArticleFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RelatedArticToJson(this);
+  Map<String, dynamic> toJson() => _$RelatedArticleToJson(this);
 
   @override
   String toString() {
-    return 'RelatedArtic(id: $id, content_type: $content_type, title: $title, thumbnail: $thumbnail, source: $source, read: $read)';
+    return 'RelatedArticle(id: $id, content_type: $content_type, title: $title, thumbnail: $thumbnail, source: $source, read: $read)';
   }
 }

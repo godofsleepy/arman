@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:arman/model/detail.dart';
-import 'package:arman/model/respondata.dart';
-import 'package:arman/model/category.dart';
-import 'package:arman/model/responlogin.dart';
-import 'package:arman/model/responpost.dart';
+import 'package:arman/model/response_detail.dart';
+import 'package:arman/model/response_data.dart';
+import 'package:arman/model/response_category.dart';
+import 'package:arman/model/response_login.dart';
+import 'package:arman/model/response_post.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:dio/dio.dart';
 

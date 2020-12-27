@@ -1,16 +1,16 @@
-import 'package:arman/model/responpost.dart';
+import 'package:arman/model/response_post.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/data/data_repository.dart';
-import 'package:arman/model/detail.dart';
+import 'package:arman/model/response_detail.dart';
 
 enum DetailStatus { initial, success, failure, like, unlike }
 
 class DetailState extends Equatable {
   String message;
   DetailStatus status;
-  ItemDetail data;
+  Detail data;
 
   DetailState({
     this.message = "",
@@ -27,7 +27,7 @@ class DetailState extends Equatable {
   DetailState copyWith({
     String message,
     DetailStatus status,
-    ItemDetail data,
+    Detail data,
   }) {
     return DetailState(
       message: message ?? this.message,

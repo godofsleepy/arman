@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'category.g.dart';
+part 'response_category.g.dart';
 
 @JsonSerializable()
 class ResponseCategory {

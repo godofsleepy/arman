@@ -1,7 +1,7 @@
 import 'package:arman/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-import 'package:arman/model/category.dart';
+import 'package:arman/model/response_category.dart';
 
 class ItemWebsite extends StatelessWidget {
   final SourceWeb sourceWeb;

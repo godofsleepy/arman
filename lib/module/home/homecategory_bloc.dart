@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:arman/data/data_repository.dart';
-import 'package:arman/model/category.dart';
+import 'package:arman/model/response_category.dart';
 
 enum HomeCategoryStatus { initial, success, failure }
 

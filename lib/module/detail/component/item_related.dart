@@ -1,8 +1,8 @@
-import 'package:arman/model/detail.dart';
+import 'package:arman/model/response_detail.dart';
 import 'package:flutter/material.dart';
 
 class ItemRelated extends StatelessWidget {
-  final RelatedArtic relatedArtic;
+  final RelatedArticle relatedArtic;
 
   const ItemRelated({Key key, this.relatedArtic}) : super(key: key);
 

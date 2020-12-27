@@ -1,5 +1,5 @@
 import 'package:arman/data/data_repository.dart';
-import 'package:arman/model/respondata.dart';
+import 'package:arman/model/response_data.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

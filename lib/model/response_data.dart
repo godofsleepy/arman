@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'news.dart';
 
-part 'respondata.g.dart';
+part 'response_data.g.dart';
 
 @JsonSerializable()
 class ResponseData {

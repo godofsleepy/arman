@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'detail.dart';
+part of 'response_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -11,7 +11,7 @@ ResponseDetail _$ResponseDetailFromJson(Map<String, dynamic> json) {
     success: json['success'] as bool,
     data: json['data'] == null
         ? null
-        : ItemDetail.fromJson(json['data'] as Map<String, dynamic>),
+        : Detail.fromJson(json['data'] as Map<String, dynamic>),
     message: json['message'] as String,
   );
 }
@@ -23,8 +23,8 @@ Map<String, dynamic> _$ResponseDetailToJson(ResponseDetail instance) =>
       'message': instance.message,
     };
 
-ItemDetail _$ItemDetailFromJson(Map<String, dynamic> json) {
-  return ItemDetail(
+Detail _$DetailFromJson(Map<String, dynamic> json) {
+  return Detail(
     id: json['id'] as int,
     content_type: json['content_type'] as String,
     content_date: json['content_date'] as String,
@@ -37,14 +37,14 @@ ItemDetail _$ItemDetailFromJson(Map<String, dynamic> json) {
     liked: json['liked'] as bool,
     bookmarked: json['bookmarked'] as bool,
     related_articles: (json['related_articles'] as List)
-        ?.map((e) =>
-            e == null ? null : RelatedArtic.fromJson(e as Map<String, dynamic>))
+        ?.map((e) => e == null
+            ? null
+            : RelatedArticle.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   );
 }
 
-Map<String, dynamic> _$ItemDetailToJson(ItemDetail instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DetailToJson(Detail instance) => <String, dynamic>{
       'id': instance.id,
       'content_type': instance.content_type,
       'content_date': instance.content_date,
@@ -59,8 +59,8 @@ Map<String, dynamic> _$ItemDetailToJson(ItemDetail instance) =>
       'related_articles': instance.related_articles,
     };
 
-RelatedArtic _$RelatedArticFromJson(Map<String, dynamic> json) {
-  return RelatedArtic(
+RelatedArticle _$RelatedArticleFromJson(Map<String, dynamic> json) {
+  return RelatedArticle(
     id: json['id'] as int,
     content_type: json['content_type'] as String,
     title: json['title'] as String,
@@ -70,7 +70,7 @@ RelatedArtic _$RelatedArticFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$RelatedArticToJson(RelatedArtic instance) =>
+Map<String, dynamic> _$RelatedArticleToJson(RelatedArticle instance) =>
     <String, dynamic>{
       'id': instance.id,
       'content_type': instance.content_type,

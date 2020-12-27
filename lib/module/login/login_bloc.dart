@@ -1,4 +1,4 @@
-import 'package:arman/model/responlogin.dart';
+import 'package:arman/model/response_login.dart';
 import 'package:arman/data/data_repository.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:equatable/equatable.dart';
