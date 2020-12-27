@@ -19,17 +19,13 @@ class ItemCategory extends StatelessWidget {
                 ClipOval(
                   child: Material(
                     color: ResColor.greenColor, // button color
-                    child: InkWell(
-                      splashColor: ResColor.whiteColor, // inkwell color
-                      child: SizedBox(
-                          width: 35,
-                          height: 35,
-                          child: Icon(
-                            Icons.home,
-                            color: Colors.white,
-                          )),
-                      onTap: () {},
-                    ),
+                    child: SizedBox(
+                        width: 35,
+                        height: 35,
+                        child: Icon(
+                          Icons.home,
+                          color: Colors.white,
+                        )),
                   ),
                 ),
                 SizedBox(
