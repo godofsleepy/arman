@@ -80,6 +80,26 @@ class _FollowingViewState extends State<FollowingView> {
                                   setState(() {
                                     state.dataWeb[index].has_interest = 0;
                                   });
+                                  return showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        title: Text('Tahap Pengembangan'),
+                                        content: Text(
+                                          'Unfollow Content Web Dan Topik Masih Dalam Tahap Pengembangan',
+                                        ),
+                                        actions: [
+                                          FlatButton(
+                                            textColor: Color(0xFF6200EE),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('ok'),
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  );
                                 } else {
                                   followingBloc.add(FollowingEventFollow(
                                       type: "sources",

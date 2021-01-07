@@ -19,7 +19,7 @@ class ItemBookmark extends StatelessWidget {
             borderRadius: BorderRadius.circular(15),
             child: news.thumbnail != null
                 ? Image.network(
-                    news.source,
+                    news.thumbnail,
                     width: 140,
                     height: 180,
                     fit: BoxFit.cover,
@@ -38,8 +38,10 @@ class ItemBookmark extends StatelessWidget {
               child: Text(
                 news.title,
                 maxLines: 3,
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  color: news.thumbnail != null ? Colors.white : Colors.black45,
+                  fontWeight: FontWeight.w600,
+                ),
                 overflow: TextOverflow.ellipsis,
               ),
             ),

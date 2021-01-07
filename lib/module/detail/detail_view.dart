@@ -200,7 +200,28 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                             ),
                             FlatButton.icon(
                               textColor: ResColor.blueColor,
-                              onPressed: () {},
+                              onPressed: () {
+                                return showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Text('Tahap Pengembangan'),
+                                      content: Text(
+                                        'Share Masih Dalam Tahap Pengembangan',
+                                      ),
+                                      actions: [
+                                        FlatButton(
+                                          textColor: Color(0xFF6200EE),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
                               icon: Icon(Icons.share, size: 30),
                               label: Text("share"),
                             ),
