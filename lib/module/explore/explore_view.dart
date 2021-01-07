@@ -173,8 +173,19 @@ class _ExploreViewState extends State<ExploreView> {
                             itemCount: state.data.length,
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) => ItemNews(
-                              item: state.data[index],
+                            itemBuilder: (context, index) => GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DetailNewsView(
+                                              id: state.data[index].id
+                                                  .toString(),
+                                            )));
+                              },
+                              child: ItemNews(
+                                item: state.data[index],
+                              ),
                             ),
                           ),
                         );

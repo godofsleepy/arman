@@ -22,6 +22,7 @@ class _FollowingViewState extends State<FollowingView> {
   }
 
   List<String> tags = [];
+  int a = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +40,10 @@ class _FollowingViewState extends State<FollowingView> {
                     // state.tags.forEach((element) {
                     //   tags.add(element.toString());
                     // });
+                    if (a == 0) {
+                      tags..addAll(state.tags);
+                      a += 1;
+                    }
                     return Column(
                       children: [
                         Align(
@@ -101,13 +106,16 @@ class _FollowingViewState extends State<FollowingView> {
                           ),
                         ),
                         ChipsChoice<String>.multiple(
-                          value: tags..addAll(state.tags),
+                          value: tags,
                           wrapped: true,
                           onChanged: (val) {
                             print(val);
-                            setState(() => tags = val);
-                            // followingBloc.add(FollowingEventFollow(
-                            //     type: "topics", id: val.last));
+                            setState(() {
+                              tags = [];
+                              tags = val;
+                            });
+                            followingBloc.add(FollowingEventFollow(
+                                type: "topics", id: tags.last));
                           },
                           choiceItems: C2Choice.listFrom<String, String>(
                             source: state.topicsStr,

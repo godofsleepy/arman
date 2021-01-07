@@ -24,6 +24,27 @@ class TagPopuler extends StatelessWidget {
                 textColor: ResColor.blueColor,
                 onPressed: () {
                   // Respond to button press
+                  print("alert");
+                  return showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Tahap Pengembangan'),
+                        content: Text(
+                          'Explore Follow Masih Dalam Tahap Pengembangan',
+                        ),
+                        actions: [
+                          FlatButton(
+                            textColor: Color(0xFF6200EE),
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: Text('ok'),
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 icon: Icon(Icons.add, size: 18),
                 label: Text("follow"),

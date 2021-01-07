@@ -43,9 +43,9 @@ class _SearchViewState extends State<SearchView> {
                 onSubmitted: (value) {
                   searchBloc.add(KeyWordSearchEvent(keyword: value));
                 },
-                onChanged: (value) {
-                  searchBloc.add(KeyWordSearchEvent(keyword: value));
-                },
+                // onChanged: (value) {
+                //   searchBloc.add(KeyWordSearchEvent(keyword: value));
+                // },
                 autofocus: true,
                 controller: searchController,
                 decoration: InputDecoration(

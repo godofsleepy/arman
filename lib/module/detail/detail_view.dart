@@ -16,6 +16,8 @@ class DetailNewsView extends StatefulWidget {
 
 class _DetailNewsViewState extends State<DetailNewsView> {
   final DetailBloc detailBloc = DetailBloc();
+  bool bookmarked = false;
+  String contentId = "none";
 
   @override
   void initState() {
@@ -25,46 +27,66 @@ class _DetailNewsViewState extends State<DetailNewsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: Container(
-          alignment: Alignment.bottomLeft,
-          padding: EdgeInsets.only(top: 4, right: 12, left: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(
-                  Icons.arrow_back,
-                  size: 26,
-                  color: ResColor.blackColor,
+    return BlocProvider(
+      create: (context) => detailBloc,
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Container(
+            alignment: Alignment.bottomLeft,
+            padding: EdgeInsets.only(top: 4, right: 12, left: 12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.arrow_back,
+                    size: 26,
+                    color: ResColor.blackColor,
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton.icon(
-                textColor: ResColor.blueColor,
-                onPressed: () {
-                  // Respond to button press
-                },
-                icon: Icon(Icons.bookmark_outline, size: 26),
-                label: Text("Bookmark"),
-              )
-            ],
+                FlatButton.icon(
+                  textColor: ResColor.blueColor,
+                  onPressed: () {
+                    if (contentId != "none") {
+                      if (bookmarked) {
+                        setState(() {
+                          detailBloc.add(DetailUnBookmarkEvent(contentId));
+                          bookmarked = false;
+                        });
+                      } else {
+                        setState(() {
+                          detailBloc.add(DetailBookmarkEvent(contentId));
+                          bookmarked = true;
+                        });
+                      }
+                    }
+                  },
+                  icon: Icon(
+                    bookmarked ? Icons.bookmark : Icons.bookmark_outline,
+                    size: 26,
+                  ),
+                  label: Text("Bookmark"),
+                )
+              ],
+            ),
           ),
         ),
-      ),
-      body: BlocProvider(
-        create: (context) => detailBloc,
-        child: SafeArea(
+        body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.only(
                   right: 24, left: 24, bottom: 16, top: 16),
               child: BlocConsumer<DetailBloc, DetailState>(
                 listener: (context, state) {
+                  if (state.status == DetailStatus.success) {
+                    setState(() {
+                      bookmarked = state.data.bookmarked;
+                    });
+                  }
                   if (state.message == "liked") {
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text("Liked"),
@@ -73,6 +95,7 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                 },
                 builder: (context, state) {
                   if (state.status == DetailStatus.success) {
+                    contentId = state.data.id.toString();
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -156,12 +179,14 @@ class _DetailNewsViewState extends State<DetailNewsView> {
                                 if (state.data.liked) {
                                   setState(() {
                                     state.data.liked = false;
-                                    detailBloc.add(DetailUnlikeEvent(state.data.id.toString()));
+                                    detailBloc.add(DetailUnlikeEvent(
+                                        state.data.id.toString()));
                                   });
                                 } else {
                                   setState(() {
                                     state.data.liked = true;
-                                    detailBloc.add(DetailLikeEvent(state.data.id.toString()));
+                                    detailBloc.add(DetailLikeEvent(
+                                        state.data.id.toString()));
                                   });
                                 }
                               },

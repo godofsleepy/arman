@@ -243,10 +243,24 @@ class _ProfileViewState extends State<ProfileView> {
                                         height: 180,
                                         child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
-                                          itemCount: 8,
-                                          itemBuilder: (BuildContext context,
-                                                  int index) =>
-                                              ItemBookmark(),
+                                          itemCount: state.data.length,
+                                          itemBuilder: (context, index) =>
+                                              GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          DetailNewsView(
+                                                            id: state
+                                                                .data[index].id
+                                                                .toString(),
+                                                          )));
+                                            },
+                                            child: ItemBookmark(
+                                              news: state.data[index],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ],

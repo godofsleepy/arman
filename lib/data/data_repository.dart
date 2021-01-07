@@ -54,6 +54,11 @@ class DataRepository {
     return apiProvider.getHistories(userAccount.tokenResult);
   }
 
+  Future<ResponseData> fetchBookmarks() async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.getBookmarks(userAccount.tokenResult);
+  }
+
   Future<ResponseData> fetchLikes() async {
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.getLikes(userAccount.tokenResult);
@@ -83,5 +88,15 @@ class DataRepository {
   Future<ResponsePost> fetchUnfollow(String type, String id) async {
     UserAccount userAccount = await sessionManager.getLoginInfo();
     return apiProvider.postUnfollow(type, id, userAccount.tokenResult);
+  }
+
+  Future<ResponsePost> fetchBookmark(String id) async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postBookmark(userAccount.tokenResult, id);
+  }
+
+  Future<ResponsePost> fetchUnbookmark(String id) async {
+    UserAccount userAccount = await sessionManager.getLoginInfo();
+    return apiProvider.postUnBookmark(userAccount.tokenResult, id);
   }
 }

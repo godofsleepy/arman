@@ -135,7 +135,8 @@ class ApiProvider {
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
 
-      final response = await dio.get('$baseUrl/api/contents/?source_id=$sourceId&page=$page');
+      final response = await dio
+          .get('$baseUrl/api/contents/?source_id=$sourceId&page=$page');
       return ResponseData.fromJson(response.data);
     } catch (e) {
       print(e);
@@ -178,6 +179,18 @@ class ApiProvider {
     }
   }
 
+  Future<ResponseData> getBookmarks(String authorization) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.get('$baseUrl/api/contents/bookmarks');
+      return ResponseData.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   Future<ResponsePost> postLike(String authorization, String id) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $authorization";
@@ -190,6 +203,31 @@ class ApiProvider {
     }
   }
 
+  Future<ResponsePost> postBookmark(String authorization, String id) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/contents/$id/bookmark');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+    Future<ResponsePost> postUnBookmark(String authorization, String id) async {
+    try {
+      dio.options.headers["Authorization"] = "Bearer $authorization";
+      dio.options.headers["Client-Platform"] = "Android";
+
+      final response = await dio.post('$baseUrl/api/contents//$id/unbookmark');
+      return ResponsePost.fromJson(response.data);
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
+
   Future<ResponsePost> postUnlike(String authorization, String id) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $authorization";
@@ -201,6 +239,4 @@ class ApiProvider {
       print(e.toString());
     }
   }
-
-  
 }

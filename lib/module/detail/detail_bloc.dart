@@ -46,6 +46,14 @@ class DetailEvent extends Equatable {
   List<Object> get props => [id];
 }
 
+class DetailBookmarkEvent extends DetailEvent {
+  DetailBookmarkEvent(String id) : super(id);
+}
+
+class DetailUnBookmarkEvent extends DetailEvent {
+  DetailUnBookmarkEvent(String id) : super(id);
+}
+
 class DetailLikeEvent extends DetailEvent {
   DetailLikeEvent(String id) : super(id);
 }
@@ -74,6 +82,20 @@ class DetailBloc extends Bloc<DetailEvent, DetailState> {
       print("run unlike");
       ResponsePost responsePost = await apiRepository.fetchUnlike(event.id);
       print(responsePost.message);
+      if (responsePost.success != null && responsePost.success == false) {
+        yield state.copyWith(
+          message: "Error",
+        );
+      }
+    } else if (event is DetailBookmarkEvent) {
+      ResponsePost responsePost = await apiRepository.fetchBookmark(event.id);
+      if (responsePost.success != null && responsePost.success == false) {
+        yield state.copyWith(
+          message: "Error",
+        );
+      }
+    } else if (event is DetailUnBookmarkEvent) {
+      ResponsePost responsePost = await apiRepository.fetchUnbookmark(event.id);
       if (responsePost.success != null && responsePost.success == false) {
         yield state.copyWith(
           message: "Error",

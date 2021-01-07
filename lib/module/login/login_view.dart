@@ -106,20 +106,40 @@ class _LoginViewState extends State<LoginView> {
                         SizedBox(
                           height: 40,
                         ),
-                        SignInButton(
-                          Buttons.Google,
-                          onPressed: () {
-                            signInWithGoogle().then((value) async {
-                              value.user.getIdToken().then((value) => print(
-                                  "access token user : ${value.toString()}"));
+                        // SignInButton(
+                        //   Buttons.Google,
+                        //   onPressed: () {
+                        //     return showDialog(
+                        //       context: context,
+                        //       builder: (BuildContext context) {
+                        //         return AlertDialog(
+                        //           title: Text('Tahap Pengembangan'),
+                        //           content: Text(
+                        //             'Login Google Masih Dalam Tahap Pengembangan, gunakan login facebook',
+                        //           ),
+                        //           actions: [
+                        //             FlatButton(
+                        //               textColor: Color(0xFF6200EE),
+                        //               onPressed: () {
+                        //                 Navigator.pop(context);
+                        //               },
+                        //               child: Text('ok'),
+                        //             ),
+                        //           ],
+                        //         );
+                        //       },
+                        //     );
+                        //     // signInWithGoogle().then((value) async {
+                        //     //   value.user.getIdToken().then((value) => print(
+                        //     //       "access token user : ${value.toString()}"));
 
-                              value.user.getIdTokenResult().then((value) =>
-                                  print("access tokenresult user : $value"));
-                              print("value ${value.toString()}");
-                              await GoogleSignIn().signOut();
-                            }).catchError((error) => print(error));
-                          },
-                        ),
+                        //     //   value.user.getIdTokenResult().then((value) =>
+                        //     //       print("access tokenresult user : $value"));
+                        //     //   print("value ${value.toString()}");
+                        //     //   await GoogleSignIn().signOut();
+                        //     // }).catchError((error) => print(error));
+                        //   },
+                        // ),
                         SignInButton(
                           Buttons.Facebook,
                           onPressed: () {
