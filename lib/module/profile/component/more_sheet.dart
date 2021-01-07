@@ -1,3 +1,4 @@
+import 'package:arman/module/about/about.dart';
 import 'package:arman/module/profile/profile_bloc.dart';
 import 'package:arman/utils/utils.dart';
 import 'package:arman/module/module.dart';
@@ -51,7 +52,10 @@ class _MoreSheetState extends State<MoreSheet> {
               FlatButton.icon(
                 textColor: ResColor.blackColor,
                 icon: Icon(Icons.info_outline),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => About()));
+                },
                 label: Text("About"),
               ),
               FlatButton.icon(
