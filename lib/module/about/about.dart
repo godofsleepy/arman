@@ -34,11 +34,9 @@ class _AboutState extends State<About> {
               ),
               Spacer(),
               Text(
-                "BUILD WITH FLUTTER, DEV.VERSION",
+                "BUILD WITH FLUTTER,  DEV.VERSION",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12
-                ),
+                style: TextStyle(fontSize: 12),
               ),
             ],
           ),

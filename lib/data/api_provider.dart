@@ -10,7 +10,6 @@ import 'package:dio/dio.dart';
 
 class ApiProvider {
   final Dio dio = Dio();
-  final SessionManager sessionManager = SessionManager();
   final String baseUrl = 'https://app.arman.id';
 
   Future<ResponseData> getRecomendation(int page, String authorization) async {
@@ -215,7 +214,7 @@ class ApiProvider {
     }
   }
 
-    Future<ResponsePost> postUnBookmark(String authorization, String id) async {
+  Future<ResponsePost> postUnBookmark(String authorization, String id) async {
     try {
       dio.options.headers["Authorization"] = "Bearer $authorization";
       dio.options.headers["Client-Platform"] = "Android";
@@ -226,7 +225,6 @@ class ApiProvider {
       print(e.toString());
     }
   }
-
 
   Future<ResponsePost> postUnlike(String authorization, String id) async {
     try {

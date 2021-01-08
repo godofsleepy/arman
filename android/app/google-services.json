@@ -66,20 +66,49 @@
     },
     {
       "client_info": {
+        "mobilesdk_app_id": "1:881099852303:android:a6b558705e8ad56db8717a",
+        "android_client_info": {
+          "package_name": "id.magangrumahcoding.arman"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881099852303-leftefadss4vii1iictj0j9n2afc7t26.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.magangrumahcoding.arman",
+            "certificate_hash": "fcaccd755218f18cb5ac87a4602d1fbf030c0ca7"
+          }
+        },
+        {
+          "client_id": "881099852303-jm4ijl93c0h07crd8me4m14kdt78uu9n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxfj06b4z2ypft9LGHkhQ6ppYo4udGCK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881099852303-itbid6b2v01kujvp6phav98to8mrsfge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:881099852303:android:fdc959870c1d3e53b8717a",
         "android_client_info": {
           "package_name": "id.rumahcoding.arman"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "881099852303-11ikud87eedrnpeg87v3knguuoujbdeo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "id.rumahcoding.arman",
-            "certificate_hash": "fcaccd755218f18cb5ac87a4602d1fbf030c0ca7"
-          }
-        },
         {
           "client_id": "881099852303-dhais1ntj5trncacgboudd11tua7i0pl.apps.googleusercontent.com",
           "client_type": 1,
