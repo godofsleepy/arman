@@ -18,7 +18,7 @@ class WidgetNews extends StatelessWidget {
         return Container();
       } else if (state.status == HomeNewsStatus.success) {
         return Container(
-          color: ResColor.greyColor,
+          color: Color(0xfff5f5f5),
           width: MediaQuery.of(context).size.width,
           child: ListView.builder(
             addAutomaticKeepAlives: true,

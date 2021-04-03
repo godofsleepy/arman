@@ -31,6 +31,7 @@ class _ExploreViewState extends State<ExploreView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff5f5f5),
       body: MultiBlocProvider(
         providers: [
           BlocProvider<ExploreTopicBloc>(

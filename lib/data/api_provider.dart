@@ -10,6 +10,7 @@ import 'package:dio/dio.dart';
 
 class ApiProvider {
   final Dio dio = Dio();
+
   final String baseUrl = 'https://app.arman.id';
 
   Future<ResponseData> getRecomendation(int page, String authorization) async {
@@ -72,6 +73,7 @@ class ApiProvider {
   Future<ResponseLogin> postLogin(
       String email, String access, String provider) async {
     try {
+      dio.interceptors.add(LoggingInterceptor());
       var params = {
         "grant_type": "social",
         "client_id": 3,
@@ -236,5 +238,60 @@ class ApiProvider {
     } catch (e) {
       print(e.toString());
     }
+  }
+}
+
+class LoggingInterceptor extends Interceptor {
+  int _maxCharactersPerLine = 200;
+
+  @override
+  Future onRequest(RequestOptions options) {
+    print(
+        "--> ${options.method != null ? options.method.toUpperCase() : 'METHOD'} ${"" + (options.baseUrl ?? "") + (options.path ?? "")}");
+    print("Headers:");
+    options.headers.forEach((k, v) => print('$k: $v'));
+    if (options.queryParameters != null) {
+      print("queryParameters:");
+      options.queryParameters.forEach((k, v) => print('$k: $v'));
+    }
+    if (options.data != null) {
+      print("Body: ${options.data}");
+    }
+    print(
+        "--> END ${options.method != null ? options.method.toUpperCase() : 'METHOD'}");
+    return super.onRequest(options);
+  }
+
+  @override
+  Future onResponse(Response response) {
+    print(
+        "<-- ${response.statusCode} ${response.request.method} ${response.request.path}");
+    String responseAsString = response.data.toString();
+    if (responseAsString.length > _maxCharactersPerLine) {
+      int iterations =
+          (responseAsString.length / _maxCharactersPerLine).floor();
+      for (int i = 0; i <= iterations; i++) {
+        int endingIndex = i * _maxCharactersPerLine + _maxCharactersPerLine;
+        if (endingIndex > responseAsString.length) {
+          endingIndex = responseAsString.length;
+        }
+        print(
+            responseAsString.substring(i * _maxCharactersPerLine, endingIndex));
+      }
+    } else {
+      print(response.data);
+    }
+    print("<-- END HTTP");
+
+    return super.onResponse(response);
+  }
+
+  @override
+  Future onError(DioError err) {
+    print(
+        "<-- ${err.message} ${(err.response?.request != null ? (err.response.request.baseUrl + err.response.request.path) : 'URL')}");
+    print("${err.response != null ? err.response.data : 'Unknown Error'}");
+    print("<-- End error");
+    return super.onError(err);
   }
 }
