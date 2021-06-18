@@ -20,7 +20,7 @@ class _AboutState extends State<About> {
             children: [
               Spacer(),
               Text(
-                "INTERNSHIP PROJECT RIFAT KHADAFY AT RUMAH CODING.\nkhadafy67@gmail.com",
+                "INTERNSHIP PROJECT RIFAT KHADAFY AT RUMAH CODING.\nrifat.khadafy@gmail.com",
                 textAlign: TextAlign.center,
               ),
               TextButton(

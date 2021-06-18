@@ -29,7 +29,7 @@ class ItemCategory extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 2,
+                  height: 8,
                 ),
                 Text(
                   "For You",
@@ -54,7 +54,7 @@ class ItemCategory extends StatelessWidget {
                       height: 35,
                     )),
                     SizedBox(
-                      height: 2,
+                      height: 8,
                     ),
                     Text(
                       sourceWeb.name,

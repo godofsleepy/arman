@@ -270,7 +270,7 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           ),
                           Positioned(
-                            top: 115,
+                            top: MediaQuery.of(context).size.width / 2.5,
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               child: Center(
@@ -287,7 +287,7 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           ),
                           Positioned(
-                            top: 175,
+                            top: MediaQuery.of(context).size.width / 1.9,
                             right: 15,
                             child: Container(
                               width: MediaQuery.of(context).size.width,
